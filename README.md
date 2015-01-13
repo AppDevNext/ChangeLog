@@ -1,5 +1,8 @@
 # ckChangeLog - An Android Library to display a Change Log
 
+[![Build status](https://api.travis-ci.org/cketti/ckChangeLog.svg)](https://travis-ci.org/cketti/ckChangeLog)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.cketti.library.changelog/ckchangelog/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.cketti.library.changelog/ckchangelog)
+
 ![Screenshot](screenshot_1.png)
 ![Screenshot](screenshot_2.png)
 
@@ -70,11 +73,11 @@ repositories {
 
 In order to change the labels of the dialog add the following items to your `strings.xml`:
 
-```
-  <string name="changelog_full_title">Change Log</string>
-  <string name="changelog_title">What\'s New</string>
-  <string name="changelog_ok_button">OK</string>
-  <string name="changelog_show_full">More…</string>
+```xml
+<string name="changelog_full_title">Change Log</string>
+<string name="changelog_title">What\'s New</string>
+<string name="changelog_ok_button">OK</string>
+<string name="changelog_show_full">More…</string>
 ```
 
 ## Changelog
