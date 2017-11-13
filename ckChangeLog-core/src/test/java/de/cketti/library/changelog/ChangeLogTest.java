@@ -120,7 +120,7 @@ public class ChangeLogTest {
         
         changeLog.writeCurrentVersion();
 
-        int lastVersionCode = preferences.getInt("ckChangeLog_last_version_code", -1);
+        int lastVersionCode = preferences.getInt("ChangeLog_last_version_code", -1);
         assertEquals(APP_VERSION_CODE, lastVersionCode);
     }
 
@@ -148,7 +148,7 @@ public class ChangeLogTest {
     }
 
     private void setLastVersionCode(int lastVersionCode) {
-        preferences.edit().putInt("ckChangeLog_last_version_code", lastVersionCode).apply();
+        preferences.edit().putInt("ChangeLog_last_version_code", lastVersionCode).apply();
     }
 
     private Context createContext() throws Exception {
