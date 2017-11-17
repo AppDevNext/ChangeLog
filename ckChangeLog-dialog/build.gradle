@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'info.changelog'
+version = '2.0.1'
 
 android {
     compileSdkVersion propCompileSdkVersion
@@ -14,8 +17,3 @@ android {
 dependencies {
     compile project(':ckChangeLog-core')
 }
-
-//project.ext.pom = rootProject.pom
-//project.ext.pom['artifactId'] = "ckchangelog-dialog"
-
-//apply from: '../android-mvn-push.gradle'
