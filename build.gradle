@@ -20,5 +20,4 @@ allprojects {
 ext {
     propBuildToolsVersion = "26.0.3"
     propCompileSdkVersion = 27
-    libraryVersion = "1.0.1-SNAPSHOT"
 }

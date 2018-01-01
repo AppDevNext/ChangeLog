@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         mavenCentral()
+        google()
+        jcenter()
     }
 
     dependencies {
@@ -24,12 +26,6 @@ android {
 }
 
 dependencies {
-    compile project(':ckChangeLog')
+    compile project(':ChangeLogLib')
     compile 'com.android.support:support-v4:27.0.2'
-}
-
-
-
-repositories {
-    google()
 }

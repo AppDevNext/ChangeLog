@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import info.hannes.R;
 
 /**
  * Display a dialog showing a full or partial (What's New) change log.
@@ -37,11 +38,11 @@ public class ChangeLog {
     /**
      * Tag that is used when sending error/debug messages to the log.
      */
-    protected static final String LOG_TAG     = "ckChangeLog";
+    protected static final String LOG_TAG     = "ChangeLog";
     /**
      * This is the key used when storing the version code in SharedPreferences.
      */
-    protected static final String VERSION_KEY = "ckChangeLog_last_version_code";
+    protected static final String VERSION_KEY = "ChangeLog_last_version_code";
     /**
      * Constant that used when no version code is available.
      */

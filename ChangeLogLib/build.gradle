@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
+        google()
     }
 
     dependencies {
@@ -18,9 +20,9 @@ android {
     buildToolsVersion propBuildToolsVersion
 
     defaultConfig {
-        versionName "1.2.3"
+        versionName "1.0.0"
 
         minSdkVersion 14
-        project.archivesBaseName = "ChangeLogCore"
+        project.archivesBaseName = "ChangeLog"
     }
 }
