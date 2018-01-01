@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2012-2017 cketti and contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cketti.library.changelog.dialog;
 
 
@@ -10,11 +25,26 @@ import android.webkit.WebView;
 
 import de.cketti.library.changelog.ChangeLog;
 import de.cketti.library.changelog.ReleaseItem;
+import de.cketti.library.changelog.R;
 
 
+/**
+ * Display a dialog showing a full or partial (What's New) Change Log.
+ *
+ * <p>
+ * You can display a Change Log after app updates by putting the following code in your Activity's {@code onCreate()}
+ * method:
+ * </p>
+ * <pre>{@code
+ * DialogChangeLog changeLog = DialogChangeLog.newInstance(this);
+ * if (changeLog.isFirstRun()) {
+ *     changeLog.getLogDialog().show();
+ * }
+ * }</pre>
+ */
 public final class DialogChangeLog {
     /**
-     * Default CSS styles used to format the change log.
+     * Default CSS styles used to format the Change Log.
      */
     public static final String DEFAULT_CSS = "" +
             "h1 { margin-left: 0px; font-size: 1.2em; }" + "\n" +
@@ -24,22 +54,37 @@ public final class DialogChangeLog {
 
     private final Context context;
     private final ChangeLog changeLog;
-    private final String css;
+    private final HtmlFormatter formatter;
 
 
+    /**
+     * Create an instance using the default CSS to format the Change Log.
+     */
     public static DialogChangeLog newInstance(Context context) {
         return DialogChangeLog.newInstance(context, DEFAULT_CSS);
     }
 
+    /**
+     * Create an instance using the supplied CSS to format the Change Log.
+     */
     public static DialogChangeLog newInstance(Context context, String css) {
         ChangeLog changeLog = ChangeLog.newInstance(context);
-        return new DialogChangeLog(context, changeLog, css);
+        String versionFormat = context.getResources().getString(R.string.changelog_version_format);
+        HtmlFormatter formatter = new HtmlFormatter(versionFormat, css);
+        return new DialogChangeLog(context, changeLog, formatter);
     }
 
-    private DialogChangeLog(Context context, ChangeLog changeLog, String css) {
+    private DialogChangeLog(Context context, ChangeLog changeLog, HtmlFormatter formatter) {
         this.context = context;
         this.changeLog = changeLog;
-        this.css = css;
+        this.formatter = formatter;
+    }
+
+    /**
+     * Get the {@code ChangeLog} instance backing this {@code DialogChangeLog}.
+     */
+    public ChangeLog getChangeLog() {
+        return changeLog;
     }
 
     /**
@@ -54,43 +99,40 @@ public final class DialogChangeLog {
     }
 
     /**
-     * Get a dialog with the full change log.
+     * Get a dialog with the full Change Log.
      *
-     * @return An AlertDialog with a full change log displayed.
+     * @return An AlertDialog with a full Change Log displayed.
      */
     public AlertDialog getFullLogDialog() {
         return getDialog(true);
     }
 
+    /**
+     * Check if this is the first execution of this app version.
+     *
+     * @return {@code true} if this version of your app is started the first time.
+     */
     public boolean isFirstRun() {
         return changeLog.isFirstRun();
     }
 
     private AlertDialog getDialog(boolean full) {
-        WebView wv = new WebView(context);
-        //wv.setBackgroundColor(0); // transparent
-        wv.loadDataWithBaseURL(null, getLog(full), "text/html", "UTF-8", null);
+        WebView webView = new WebView(context);
+        webView.loadDataWithBaseURL(null, getChangeLogHtml(full), "text/html", "UTF-8", null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(
-                context.getResources().getString(
-                        full ? R.string.changelog_full_title : R.string.changelog_title))
-                .setView(wv)
+        builder.setTitle(full ? R.string.changelog_full_title : R.string.changelog_title)
+                .setView(webView)
                 .setCancelable(false)
-                // OK button
-                .setPositiveButton(
-                        context.getResources().getString(R.string.changelog_ok_button),
+                .setPositiveButton(R.string.changelog_ok_button,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // The user clicked "OK" so save the current version code as
-                                // "last version code".
                                 changeLog.writeCurrentVersion();
                             }
                         });
 
         if (!full) {
-            // Show "More…" button if we're only displaying a partial change log.
             builder.setNegativeButton(R.string.changelog_show_full,
                     new DialogInterface.OnClickListener() {
                         @Override
@@ -103,31 +145,11 @@ public final class DialogChangeLog {
         return builder.create();
     }
 
-    private String getLog(boolean full) {
-        StringBuilder sb = new StringBuilder();
+    private String getChangeLogHtml(boolean full) {
+        List<ReleaseItem> changelog = full ?
+                changeLog.getChangeLog() :
+                changeLog.getRecentChanges();
 
-        sb.append("<html><head><style type=\"text/css\">");
-        sb.append(css);
-        sb.append("</style></head><body>");
-
-        String versionFormat = context.getResources().getString(R.string.changelog_version_format);
-
-        List<ReleaseItem> changelog = changeLog.getChangeLog(full);
-
-        for (ReleaseItem release : changelog) {
-            sb.append("<h1>");
-            sb.append(String.format(versionFormat, release.versionName));
-            sb.append("</h1><ul>");
-            for (String change : release.changes) {
-                sb.append("<li>");
-                sb.append(change);
-                sb.append("</li>");
-            }
-            sb.append("</ul>");
-        }
-
-        sb.append("</body></html>");
-
-        return sb.toString();
+        return formatter.createHtmlChangeLog(changelog);
     }
 }

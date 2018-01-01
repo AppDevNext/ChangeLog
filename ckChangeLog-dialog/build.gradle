@@ -5,13 +5,16 @@ android {
     buildToolsVersion propBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 4
-
-        versionCode 1
-        versionName "1.0"
+        versionName libraryVersion
+        minSdkVersion 14
     }
 }
 
 dependencies {
     compile project(':ckChangeLog-core')
 }
+
+project.ext.pom = rootProject.pom
+project.ext.pom['artifactId'] = "ckchangelog-dialog"
+
+apply from: '../android-mvn-push.gradle'

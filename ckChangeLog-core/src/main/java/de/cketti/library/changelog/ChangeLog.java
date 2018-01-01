@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2015 cketti and contributors
+ * Copyright (C) 2012-2017 cketti and contributors
  * https://github.com/cketti/ckChangeLog/graphs/contributors
  *
  * Portions Copyright (C) 2012 Martin van Zuilekom (http://martin.cubeactive.com)
@@ -33,29 +33,20 @@
  */
 package de.cketti.library.changelog;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import java.util.List;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.XmlResourceParser;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.util.SparseArray;
 
 
 /**
- * Generate a full or partial (What's New) change log.
+ * Generate a full or partial (What's New) Change Log.
  */
-@SuppressWarnings("UnusedDeclaration")
 public final class ChangeLog {
     private static final String LOG_TAG = "ckChangeLog";
     private static final String VERSION_KEY = "ckChangeLog_last_version_code";
@@ -63,6 +54,8 @@ public final class ChangeLog {
 
 
     private final Context context;
+    private final SharedPreferences preferences;
+    private final ChangeLogProvider changeLogProvider;
     private int lastVersionCode;
     private int currentVersionCode;
     private String currentVersionName;
@@ -89,17 +82,40 @@ public final class ChangeLog {
      *
      */
     public static ChangeLog newInstance(Context context, SharedPreferences preferences) {
-        ChangeLog changeLog = new ChangeLog(context);
-        changeLog.init(preferences);
+        ChangeLogProvider masterChangeLogProvider = new ResourceChangeLogProvider(context, R.xml.changelog_master);
+        ChangeLogProvider localizedChangeLogProvider = new ResourceChangeLogProvider(context, R.xml.changelog);
+        ChangeLogProvider changeLogProvider = new MergedChangeLogProvider(
+                masterChangeLogProvider, localizedChangeLogProvider);
+
+        return newInstance(context, preferences, changeLogProvider);
+    }
+
+    /**
+     * Create a {@code ChangeLog} instance using the supplied {@code SharedPreferences} and {@code ChangeLogProvider}
+     * instances.
+     *
+     * @param context
+     *         Context that is used to access resources.
+     * @param preferences
+     *         {@code SharedPreferences} instance that is used to persist the last version code.
+     * @param changeLogProvider
+     *         {@code ChangeLogProvider} instance that is used to retrieve the Change Log.
+     */
+    public static ChangeLog newInstance(Context context, SharedPreferences preferences,
+            ChangeLogProvider changeLogProvider) {
+        ChangeLog changeLog = new ChangeLog(context, preferences, changeLogProvider);
+        changeLog.init();
 
         return changeLog;
     }
 
-    private ChangeLog(Context context) {
+    private ChangeLog(Context context, SharedPreferences preferences, ChangeLogProvider changeLogProvider) {
         this.context = context;
+        this.preferences = preferences;
+        this.changeLogProvider = changeLogProvider;
     }
 
-    private void init(SharedPreferences preferences) {
+    private void init() {
         lastVersionCode = preferences.getInt(VERSION_KEY, NO_VERSION);
 
         try {
@@ -177,153 +193,26 @@ public final class ChangeLog {
      * </p>
      */
     public void writeCurrentVersion() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(VERSION_KEY, currentVersionCode);
-
-        // TODO: Update preferences from a background thread
-        editor.commit();
+        editor.apply();
     }
 
     /**
-     * Returns the merged change log.
+     * Returns the full Change Log.
      *
-     * @param full
-     *         If this is {@code true} the full change log is returned. Otherwise only changes for
-     *         versions newer than the last version are returned.
-     *
-     * @return A sorted {@code List} containing {@link ReleaseItem}s representing the (partial)
-     *         change log.
-     *
-     * @see #getChangeLogComparator()
+     * @return A sorted {@code List} containing {@link ReleaseItem}s representing the full Change Log.
      */
-    public List<ReleaseItem> getChangeLog(boolean full) {
-        SparseArray<ReleaseItem> masterChangelog = getMasterChangeLog(full);
-        SparseArray<ReleaseItem> changelog = getLocalizedChangeLog(full);
-
-        List<ReleaseItem> mergedChangeLog = new ArrayList<ReleaseItem>(masterChangelog.size());
-
-        for (int i = 0, len = masterChangelog.size(); i < len; i++) {
-            int key = masterChangelog.keyAt(i);
-
-            // Use release information from localized change log and fall back to the master file
-            // if necessary.
-            ReleaseItem release = changelog.get(key, masterChangelog.get(key));
-
-            mergedChangeLog.add(release);
-        }
-
-        Collections.sort(mergedChangeLog, getChangeLogComparator());
-
-        return mergedChangeLog;
+    public List<ReleaseItem> getChangeLog() {
+        return changeLogProvider.getChangeLog();
     }
 
-    private SparseArray<ReleaseItem> getMasterChangeLog(boolean full) {
-        return readChangeLogFromResource(R.xml.changelog_master, full);
-    }
-
-    private SparseArray<ReleaseItem> getLocalizedChangeLog(boolean full) {
-        return readChangeLogFromResource(R.xml.changelog, full);
-    }
-
-    private SparseArray<ReleaseItem> readChangeLogFromResource(int resId, boolean full) {
-        XmlResourceParser xml = context.getResources().getXml(resId);
-        try {
-            return readChangeLog(xml, full);
-        } finally {
-            xml.close();
-        }
-    }
-
-    private SparseArray<ReleaseItem> readChangeLog(XmlPullParser xml, boolean full) {
-        SparseArray<ReleaseItem> result = new SparseArray<ReleaseItem>();
-
-        try {
-            int eventType = xml.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                if (eventType == XmlPullParser.START_TAG && xml.getName().equals(ReleaseTag.NAME)) {
-                    if (parseReleaseTag(xml, full, result)) {
-                        // Stop reading more elements if this entry is not newer than the last
-                        // version.
-                        break;
-                    }
-                }
-                eventType = xml.next();
-            }
-        } catch (XmlPullParserException e) {
-            Log.e(LOG_TAG, e.getMessage(), e);
-        } catch (IOException e) {
-            Log.e(LOG_TAG, e.getMessage(), e);
-        }
-
-        return result;
-    }
-
-    private boolean parseReleaseTag(XmlPullParser xml, boolean full,
-            SparseArray<ReleaseItem> changelog) throws XmlPullParserException, IOException {
-
-        String version = xml.getAttributeValue(null, ReleaseTag.ATTRIBUTE_VERSION);
-
-        int versionCode;
-        try {
-            String versionCodeStr = xml.getAttributeValue(null, ReleaseTag.ATTRIBUTE_VERSION_CODE);
-            versionCode = Integer.parseInt(versionCodeStr);
-        } catch (NumberFormatException e) {
-            versionCode = NO_VERSION;
-        }
-
-        if (!full && versionCode <= lastVersionCode) {
-            return true;
-        }
-
-        int eventType = xml.getEventType();
-        List<String> changes = new ArrayList<String>();
-        while (eventType != XmlPullParser.END_TAG || xml.getName().equals(ChangeTag.NAME)) {
-            if (eventType == XmlPullParser.START_TAG && xml.getName().equals(ChangeTag.NAME)) {
-                eventType = xml.next();
-                String text = cleanText(xml.getText());
-                changes.add(text);
-            }
-            eventType = xml.next();
-        }
-
-        ReleaseItem release = new ReleaseItem(versionCode, version, changes);
-        changelog.put(versionCode, release);
-
-        return false;
-    }
-
-    private String cleanText(String text) {
-        return text.trim().replaceAll("\\s+", " ");
-    }
-
-    private Comparator<ReleaseItem> getChangeLogComparator() {
-        return new Comparator<ReleaseItem>() {
-            @Override
-            public int compare(ReleaseItem lhs, ReleaseItem rhs) {
-                if (lhs.versionCode < rhs.versionCode) {
-                    return 1;
-                } else if (lhs.versionCode > rhs.versionCode) {
-                    return -1;
-                } else {
-                    return 0;
-                }
-            }
-        };
-    }
-
-
-    private interface ChangeLogTag {
-        String NAME = "changelog";
-    }
-
-    private interface ReleaseTag {
-        String NAME = "release";
-        String ATTRIBUTE_VERSION = "version";
-        String ATTRIBUTE_VERSION_CODE = "versioncode";
-    }
-
-    private interface ChangeTag {
-        String NAME = "change";
+    /**
+     * Returns the list of changes for versions newer than the last version ("What's New").
+     *
+     * @return A sorted {@code List} containing {@link ReleaseItem}s representing the recent changes.
+     */
+    public List<ReleaseItem> getRecentChanges() {
+        return changeLogProvider.getChangeLogSince(lastVersionCode);
     }
 }
