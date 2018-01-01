@@ -1,23 +1,13 @@
-# ckChangeLog - An Android Library to display a Change Log
+[![Build status](https://api.travis-ci.org/hannesa2/ChangeLog.svg)](https://travis-ci.org/cketti/ChangeLog)
+[![](https://jitpack.io/v/hannesa2/ChangeLog.svg)](https://jitpack.io/#hannesa2/ChangeLog)
 
-[![Build status](https://api.travis-ci.org/cketti/ckChangeLog.svg)](https://travis-ci.org/cketti/ckChangeLog)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.cketti.library.changelog/ckchangelog-dialog/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.cketti.library.changelog/ckchangelog-dialog)
+
+# ChangeLog - An Android Library to display a Change Log
 
 ![Screenshot](screenshot_1.png)
 ![Screenshot](screenshot_2.png)
 
 This library provides an easy way to display a change log in your app.
-
-## Features
-
- * Displays changes since the last app update
- * Can display the complete change log history
- * Uses a simple XML file as source
- * Supports partial translations
- * Easily extensible to use something other than a dialog
-
-Repository at <https://github.com/cketti/ckChangeLog>.
-
 
 ## Usage
 
@@ -56,16 +46,16 @@ language-specific versions of `res/xml/`, e.g. `res/xml-de/changelog.xml`.
 The easiest way to add ckChangeLog to your project is via Gradle. Just add the following lines to your `build.gradle`:
 
 ```groovy
-dependencies {
-    compile 'de.cketti.library.changelog:ckchangelog-dialog:2.0.0'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
-
-To tell Gradle where to find the library, make sure `build.gradle` also contains this:
-
-```groovy
-repositories {
-    mavenCentral()
+```
+dependencies {
+     compile 'com.github.hannesa2:ChangeLog:V2.0.0'
 }
 ```
 
@@ -81,20 +71,9 @@ In order to change the labels of the dialog add the following items to your `str
 <string name="changelog_version_format">Version <xliff:g id="version_name">%s</xliff:g></string>
 ```
 
-## Acknowledgments
-
-This library is based on:
-* [android-change-log](http://code.google.com/p/android-change-log/) by Karsten Priegnitz
-* [Inscription](https://github.com/MartinvanZ/Inscription/) by [Martin van Zuilekom](https://github.com/MartinvanZ/)
-
-Other contributors:
-* [See here](https://github.com/cketti/ckChangeLog/graphs/contributors)
-* You? Create a [pull request](https://github.com/cketti/ckChangeLog/pulls).
-
-
 ## License
 
-    Copyright (C) 2012-2017 cketti and contributors
+    Copyright (C) 2012-2017 hannesa2 and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

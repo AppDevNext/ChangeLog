@@ -15,5 +15,5 @@ android {
 }
 
 dependencies {
-    compile project(':ckChangeLog-core')
+    compile project(':ChangeLog-core')
 }

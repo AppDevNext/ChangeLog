@@ -1,4 +1,4 @@
-include ':ckChangeLog-core'
-include ':ckChangeLog-dialog'
+include ':ChangeLog-core'
+include ':ChangeLog-dialog'
 include ':sample'
 rootProject.name = 'artifact'

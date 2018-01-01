@@ -14,7 +14,7 @@ android {
 }
 
 dependencies {
-    compile project(':ckChangeLog-dialog')
+    compile project(':ChangeLog-dialog')
     compile 'com.android.support:support-v4:27.0.2'
 }
 
