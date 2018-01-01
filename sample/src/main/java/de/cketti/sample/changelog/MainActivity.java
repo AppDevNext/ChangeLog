@@ -1,6 +1,6 @@
 package de.cketti.sample.changelog;
 
-import de.cketti.library.changelog.ChangeLog;
+import info.hannes.changelog.ChangeLog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
