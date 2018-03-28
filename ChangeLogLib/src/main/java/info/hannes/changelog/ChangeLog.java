@@ -159,7 +159,9 @@ public class ChangeLog {
      * @return {@code true} if this version of your app is started the first time.
      */
     public boolean isFirstRun() {
-        return mLastVersionCode < mCurrentVersionCode;
+        boolean first =  mLastVersionCode < mCurrentVersionCode;
+        updateVersionInPreferences();
+        return first;
     }
 
     /**
@@ -169,7 +171,9 @@ public class ChangeLog {
      * Also {@code true} if your app was uninstalled and installed again.
      */
     public boolean isFirstRunEver() {
-        return mLastVersionCode == NO_VERSION;
+        boolean firstEver =  mLastVersionCode == NO_VERSION;
+        updateVersionInPreferences();
+        return firstEver;
     }
 
     /**
@@ -255,9 +259,7 @@ public class ChangeLog {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt(VERSION_KEY, mCurrentVersionCode);
-
-        // TODO: Update preferences from a background thread
-        editor.commit();
+        editor.apply();
     }
 
     /**
