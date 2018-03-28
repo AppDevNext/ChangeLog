@@ -14,8 +14,8 @@ android {
 }
 
 dependencies {
-    compile project(':ChangeLog-dialog')
-    compile 'com.android.support:support-v4:27.0.2'
+    implementation project(':ChangeLog-dialog')
+    implementation 'com.android.support:support-v4:27.1.0'
 }
 
 
