@@ -47,7 +47,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void getLastVersionCode() throws Exception {
+    public void getLastVersionCodeTest() {
         setLastVersionCode(2);
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
 
@@ -57,7 +57,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void getCurrentVersionCode() throws Exception {
+    public void getCurrentVersionCode() {
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
 
         int currentVersionCode = changeLog.getCurrentVersionCode();
@@ -66,7 +66,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void getCurrentVersionName() throws Exception {
+    public void getCurrentVersionName() {
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
 
         String currentVersionName = changeLog.getCurrentVersionName();
@@ -75,7 +75,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void isFirstRun_withLastVersionCodeSmallerThanCurrentVersion_shouldReturnTrue() throws Exception {
+    public void isFirstRun_withLastVersionCodeSmallerThanCurrentVersion_shouldReturnTrue() {
         setLastVersionCode(1);
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         
@@ -85,7 +85,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void isFirstRun_withLastVersionCodeEqualToCurrentVersion_shouldReturnFalse() throws Exception {
+    public void isFirstRun_withLastVersionCodeEqualToCurrentVersion_shouldReturnFalse() {
         setLastVersionCode(APP_VERSION_CODE);
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         
@@ -95,7 +95,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void isFirstRunEver_withLastVersionCodeSet_shouldReturnFalse() throws Exception {
+    public void isFirstRunEver_withLastVersionCodeSet_shouldReturnFalse() {
         setLastVersionCode(1);
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         
@@ -105,7 +105,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void isFirstRunEver_withLastVersionCodeUnset_shouldReturnTrue() throws Exception {
+    public void isFirstRunEver_withLastVersionCodeUnset_shouldReturnTrue() {
         setLastVersionCode(-1);
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         
@@ -115,17 +115,17 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void writeCurrentVersion() throws Exception {
+    public void writeCurrentVersion() {
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         
         changeLog.writeCurrentVersion();
 
-        int lastVersionCode = preferences.getInt("ChangeLog_last_version_code", -1);
+        int lastVersionCode = preferences.getInt(ChangeLog.VERSION_KEY, -1);
         assertEquals(APP_VERSION_CODE, lastVersionCode);
     }
 
     @Test
-    public void getChangeLog_shouldReturnDataFromChangeLogProvider() throws Exception {
+    public void getChangeLog_shouldReturnDataFromChangeLogProvider() {
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         List<ReleaseItem> releaseItemsToReturn = new ArrayList<>();
         when(changeLogProvider.getChangeLog()).thenReturn(releaseItemsToReturn);
@@ -136,7 +136,7 @@ public class ChangeLogTest {
     }
 
     @Test
-    public void getRecentChanges_shouldReturnDataFromChangeLogProvider() throws Exception {
+    public void getRecentChanges_shouldReturnDataFromChangeLogProvider() {
         setLastVersionCode(2);
         ChangeLog changeLog = ChangeLog.newInstance(context, preferences, changeLogProvider);
         List<ReleaseItem> releaseItemsToReturn = new ArrayList<>();
@@ -148,7 +148,7 @@ public class ChangeLogTest {
     }
 
     private void setLastVersionCode(int lastVersionCode) {
-        preferences.edit().putInt("ChangeLog_last_version_code", lastVersionCode).apply();
+        preferences.edit().putInt(ChangeLog.VERSION_KEY, lastVersionCode).apply();
     }
 
     private Context createContext() throws Exception {

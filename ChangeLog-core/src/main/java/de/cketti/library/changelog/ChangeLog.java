@@ -49,7 +49,7 @@ import android.util.Log;
  */
 public final class ChangeLog {
     private static final String LOG_TAG = "ckChangeLog";
-    private static final String VERSION_KEY = "ckChangeLog_last_version_code";
+    public static final String VERSION_KEY = "ckChangeLog_last_version_code";
     private static final int NO_VERSION = -1;
 
 
