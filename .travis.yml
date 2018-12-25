@@ -1,8 +1,9 @@
 language: android
+
 android:
   components:
-    - build-tools-26.0.2
-    - android-26
+    - build-tools-28.0.3
+    - android-28
     - extra-android-m2repository
   licenses:
     - 'android-sdk-license-.+'
@@ -13,4 +14,5 @@ before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
 
-script: ./gradlew assembleDebug testDebugUnitTest
+script:
+  - ./gradlew assembleDebug testDebugUnitTest

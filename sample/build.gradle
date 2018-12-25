@@ -1,31 +1,18 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
-    }
-}
-
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion propCompileSdkVersion
-    buildToolsVersion propBuildToolsVersion
 
     defaultConfig {
         versionCode 1
         versionName "1.0"
 
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 28
     }
 }
 
 dependencies {
     compile project(':ChangeLogLib')
-    compile 'com.android.support:support-v4:27.1.0'
+    compile 'com.android.support:support-v4:28.0.0'
 }

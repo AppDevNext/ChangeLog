@@ -1,23 +1,7 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-        google()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
-    }
-}
-
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'info.changelog'
-version = '1.0.2'
 
 android {
     compileSdkVersion propCompileSdkVersion
-    buildToolsVersion propBuildToolsVersion
 
     defaultConfig {
         versionName "1.0.0"
