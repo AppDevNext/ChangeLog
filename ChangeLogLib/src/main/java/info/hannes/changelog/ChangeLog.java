@@ -31,14 +31,14 @@ public class ChangeLog {
     /**
      * Default CSS styles used to format the change log.
      */
-    public static final    String DEFAULT_CSS =
+    public static final String DEFAULT_CSS =
             "h1 { margin-left: 0px; font-size: 1.2em; }" + "\n" +
                     "li { margin-left: 0px; }" + "\n" +
                     "ul { padding-left: 2em; }";
     /**
      * Tag that is used when sending error/debug messages to the log.
      */
-    protected static final String LOG_TAG     = "ChangeLog";
+    private static final String LOG_TAG = "ChangeLog";
     /**
      * This is the key used when storing the version code in SharedPreferences.
      */
@@ -46,11 +46,11 @@ public class ChangeLog {
     /**
      * Constant that used when no version code is available.
      */
-    protected static final int    NO_VERSION  = -1;
+    protected static final int NO_VERSION = -1;
     /**
      * Context that is used to access the resources and to create the ChangeLog dialogs.
      */
-    protected final Context mContext;
+    private final Context mContext;
 
     /**
      * Contains the CSS rules used to format the change log.
@@ -159,7 +159,7 @@ public class ChangeLog {
      * @return {@code true} if this version of your app is started the first time.
      */
     public boolean isFirstRun() {
-        boolean first =  mLastVersionCode < mCurrentVersionCode;
+        boolean first = mLastVersionCode < mCurrentVersionCode;
         updateVersionInPreferences();
         return first;
     }
@@ -171,7 +171,7 @@ public class ChangeLog {
      * Also {@code true} if your app was uninstalled and installed again.
      */
     public boolean isFirstRunEver() {
-        boolean firstEver =  mLastVersionCode == NO_VERSION;
+        boolean firstEver = mLastVersionCode == NO_VERSION;
         updateVersionInPreferences();
         return firstEver;
     }
@@ -216,15 +216,15 @@ public class ChangeLog {
      * @return A dialog containing the (partial) change log.
      */
     protected AlertDialog getDialog(boolean full) {
-        WebView wv = new WebView(mContext);
+        WebView webView = new WebView(mContext);
         //wv.setBackgroundColor(0); // transparent
-        wv.loadDataWithBaseURL(null, getLog(full), "text/html", "UTF-8", null);
+        webView.loadDataWithBaseURL(null, getLog(full), "text/html", "UTF-8", null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle(
                 mContext.getResources().getString(
                         full ? R.string.changelog_full_title : R.string.changelog_title))
-                .setView(wv)
+                .setView(webView)
                 .setCancelable(false)
                 // OK button
                 .setPositiveButton(
@@ -498,8 +498,8 @@ public class ChangeLog {
      * Contains constants for the release element of {@code changelog.xml}.
      */
     protected interface ReleaseTag {
-        static final String NAME                   = "release";
-        static final String ATTRIBUTE_VERSION      = "version";
+        static final String NAME = "release";
+        static final String ATTRIBUTE_VERSION = "version";
         static final String ATTRIBUTE_VERSION_CODE = "versioncode";
     }
 
