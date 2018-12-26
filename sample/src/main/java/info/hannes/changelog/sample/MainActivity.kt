@@ -1,4 +1,4 @@
-package de.cketti.sample.changelog
+package info.hannes.changelog.sample
 
 import android.content.Context
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentActivity
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
+import de.cketti.sample.changelog.R
 import info.hannes.changelog.ChangeLog
-
 
 class MainActivity : FragmentActivity() {
 
