@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion propCompileSdkVersion
@@ -9,4 +10,8 @@ android {
         minSdkVersion 14
         project.archivesBaseName = "ChangeLog"
     }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
