@@ -1,4 +1,4 @@
-package de.cketti.sample.changelog
+package info.hannes.changelog.sample
 
 import android.content.Context
 import android.os.Bundle
@@ -8,16 +8,15 @@ import android.view.Menu
 import android.view.MenuItem
 import info.hannes.changelog.ChangeLog
 
-
 class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val cl = ChangeLog(this)
-        if (cl.isFirstRun) {
-            cl.logDialog.show()
+        val changeLog = ChangeLog(this)
+        if (changeLog.isFirstRun) {
+            changeLog.logDialog.show()
         }
     }
 
