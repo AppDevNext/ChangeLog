@@ -1,0 +1,509 @@
+[
+{
+ "version": "",
+ "code": "86",
+ "date": "Wed Dec 26 19:04:43 2018 +0100",
+ "message": "generate-a-git-changelog"
+},
+{
+ "version": "",
+ "code": "86",
+ "date": "Wed Dec 26 09:07:24 2018 +0100",
+ "message": "Merge-pull-request-6-from-hannesa2-renames"
+},
+{
+ "version": "",
+ "code": "86",
+ "date": "Wed Dec 26 08:46:30 2018 +0100",
+ "message": "Renames"
+},
+{
+ "version": "",
+ "code": "86",
+ "date": "Wed Dec 26 08:11:00 2018 +0100",
+ "message": "Merge-pull-request-4-from-hannesa2-Kotlin"
+},
+{
+ "version": "",
+ "code": "86",
+ "date": "Wed Dec 26 08:07:06 2018 +0100",
+ "message": "Kotlin"
+},
+{
+ "version": "",
+ "code": "86",
+ "date": "Wed Dec 26 07:46:13 2018 +0100",
+ "message": "code-format"
+},{
+ "version": "1.0.2",
+ "code": "77",
+ "date": "Tue Dec 25 09:12:24 2018 +0100",
+ "message": "Merge-pull-request-2-from-hannesa2-updateLibs"
+},
+{
+ "version": "1.0.2",
+ "code": "77",
+ "date": "Tue Dec 25 09:00:22 2018 +0100",
+ "message": "Travis-fix"
+},
+{
+ "version": "1.0.2",
+ "code": "77",
+ "date": "Tue Dec 25 08:44:19 2018 +0100",
+ "message": "update-libs"
+},{
+ "version": "V1.0.2",
+ "code": "76",
+ "date": "Wed Mar 28 11:23:48 2018 +0200",
+ "message": "change-versioncode-on-asking-for-it"
+},
+{
+ "version": "V1.0.2",
+ "code": "76",
+ "date": "Wed Mar 28 11:23:21 2018 +0200",
+ "message": "BUILD-update-to-Gradle-build-tools-3.1.0"
+},{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Jan 1 09:34:07 2018 +0100",
+ "message": "try-to-build"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Jan 1 09:19:21 2018 +0100",
+ "message": "publish-Jitpack.io"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Jan 1 09:15:54 2018 +0100",
+ "message": "change-package-name"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Jan 1 09:09:44 2018 +0100",
+ "message": "upgrade-to-most-recent-Android-O"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Nov 8 07:42:36 2017 +0100",
+ "message": "show-full-log-when-versionCode-is-not-maintained"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 10:19:46 2015 +0100",
+ "message": "v1.2.2"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 10:14:19 2015 +0100",
+ "message": "Update-changelog-in-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 10:07:58 2015 +0100",
+ "message": "Change-launcher-icon-of-sample-app"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:49:09 2015 +0100",
+ "message": "Suppress-some-lint-warnings-in-sample-app"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:46:39 2015 +0100",
+ "message": "Ignore-warnings-for-unused-method-declarations"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:44:51 2015 +0100",
+ "message": "Ignore-lint-warnings-for-AboutLibrary-related-strings"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:37:54 2015 +0100",
+ "message": "Update-targetSdkVersion-for-sample-app"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:34:22 2015 +0100",
+ "message": "Move-values-from-AndroidManifest.xml-to-build.gradle"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:17:17 2015 +0100",
+ "message": "Change-Javadoc-that-shows-up-as-error-in-Android-Studio"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 09:05:07 2015 +0100",
+ "message": "Update-copyright-notices"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 08:57:37 2015 +0100",
+ "message": "Update-feature-list"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 08:55:54 2015 +0100",
+ "message": "Update-README-to-ask-for-pull-requests-against-dev"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 08:49:18 2015 +0100",
+ "message": "Add-section-on-customizing-labels-to-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 08:48:25 2015 +0100",
+ "message": "Add-Ukrainian-translation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jan 9 08:35:02 2015 +0100",
+ "message": "Use-newer-build-tools-versions-Android-support-library"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 23:45:12 2014 -0400",
+ "message": "v1.2.1"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 23:31:15 2014 -0400",
+ "message": "Update-changelog-in-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 23:02:33 2014 -0400",
+ "message": "Add-support-for-the-AboutLibraries-library"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 21:21:28 2014 -0400",
+ "message": "Add-links-to-Android-Javadocs-in-generated-documentation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 21:09:10 2014 -0400",
+ "message": "Generate-documentation-before-creating-Javadoc-JAR"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 21:02:39 2014 -0400",
+ "message": "Make-android-mvn-push.gradle-work-with-new-Gradle-version-plugin"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sat Oct 18 20:09:42 2014 -0400",
+ "message": "Use-newer-versions-of-build-tools-Gradle-plugin-SDK"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Feb 10 17:48:01 2014 +0100",
+ "message": "Add-syntax-highlighting-for-Gradle-snippets"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Thu Nov 21 08:38:48 2013 +0100",
+ "message": "Expand-list-of-features-in-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Thu Nov 21 08:30:14 2013 +0100",
+ "message": "Add-basic-instructions-on-how-to-include-the-library-into-a-project"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Thu Nov 21 01:06:34 2013 +0100",
+ "message": "v1.2.0"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Thu Nov 21 01:06:06 2013 +0100",
+ "message": "Update-changelog-in-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Nov 20 10:30:10 2013 +0100",
+ "message": "Update-Gradle-files-to-support-uploading-to-Maven-repositories"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Nov 20 08:12:21 2013 +0100",
+ "message": "Update-.gitignore"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Nov 20 05:43:44 2013 +0100",
+ "message": "Link-to-Github-contributors-page-for-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Nov 20 05:34:00 2013 +0100",
+ "message": "Make-it-easier-to-read-external-change-log-files"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Oct 22 10:36:25 2013 +0400",
+ "message": "Add-Russian-translation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Oct 14 20:56:39 2013 +0200",
+ "message": "Add-Polish-translation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sun Nov 3 16:38:35 2013 +0100",
+ "message": "Update-projects-to-use-Gradle"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sun Nov 3 16:57:10 2013 +0100",
+ "message": "Remove-references-to-strings-in-the-library-project"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Sun Oct 13 08:06:40 2013 +0200",
+ "message": "Update-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Oct 9 21:08:01 2013 +0200",
+ "message": "Add-Spanish-translation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Oct 7 01:40:30 2013 +0200",
+ "message": "Change-minSdkVersion-of-the-library-to-4"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Oct 7 01:17:44 2013 +0200",
+ "message": "Update-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Oct 7 01:14:10 2013 +0200",
+ "message": "Add-Greek-translation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Oct 1 04:03:41 2013 +0200",
+ "message": "Extend-sample-to-show-how-to-display-themed-dialogs"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Oct 1 03:35:07 2013 +0200",
+ "message": "Make-constant-containing-default-CSS-rules-public"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:54:34 2013 +0200",
+ "message": "v1.1.0"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:53:44 2013 +0200",
+ "message": "Update-changelog-in-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:46:47 2013 +0200",
+ "message": "Move-german-translation-from-sample-app-to-library-project"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:43:00 2013 +0200",
+ "message": "Add-newlines-to-default-CSS"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:41:17 2013 +0200",
+ "message": "Update-copyright-notes"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:38:30 2013 +0200",
+ "message": "Update-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:35:15 2013 +0200",
+ "message": "Merge-branch-pr-5-into-dev"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Aug 30 01:33:27 2013 +0200",
+ "message": "Rename-dontShowLogDialog-and-reformat-Javadoc-comment"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Aug 20 13:03:16 2013 -0400",
+ "message": "Added-new-dontShowLogDialog-method-to-the-ChangeLog-class"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 30 15:41:44 2013 +0200",
+ "message": "SK-translation"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 14:14:27 2013 +0200",
+ "message": "v1.0.0"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 14:16:49 2013 +0200",
+ "message": "Cosmetic-changes-to-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 13:54:21 2013 +0200",
+ "message": "Change-links-to-screenshots"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 13:53:47 2013 +0200",
+ "message": "Update-changelog-in-README"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 13:44:42 2013 +0200",
+ "message": "Update-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 13:43:36 2013 +0200",
+ "message": "Change-line-endings-from-CRLF-to-LF"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 13:29:28 2013 +0200",
+ "message": "Add-German-translation-of-sample-app"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 13:01:27 2013 +0200",
+ "message": "Merge-pull-request-3-from-zjw-validate_changelog"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Tue Jul 23 12:17:50 2013 +0200",
+ "message": "Fix-sample-app-to-use-the-new-changelog_master.xml-file"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Mon Jul 22 22:20:21 2013 -0400",
+ "message": "Move-master-change-log-to-res-xml-changelog_master.xml"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jun 28 17:08:19 2013 +0200",
+ "message": "Update-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Fri Jun 28 08:05:22 2013 -0700",
+ "message": "Merge-pull-request-2-from-ming13-readme-syntax-highlighting"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Jun 26 17:49:07 2013 +0300",
+ "message": "Use-syntax-highlighting-in-the-readme-file"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Thu Jan 10 00:03:31 2013 +0100",
+ "message": "Update-list-of-contributors"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Jan 9 15:01:21 2013 -0800",
+ "message": "Merge-pull-request-1-from-andrewachen-master"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Jan 9 13:30:07 2013 -0800",
+ "message": "Add-a-Maven-pom-for-dependency-management"
+},
+{
+ "version": "V1.0.1",
+ "code": "74",
+ "date": "Wed Jan 9 13:29:48 2013 -0800",
+ "message": "Add-a-sane-.gitignore-for-Android-development"
+}
+]

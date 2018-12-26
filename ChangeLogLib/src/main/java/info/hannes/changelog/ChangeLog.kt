@@ -9,11 +9,14 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.util.SparseArray
 import android.webkit.WebView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import info.hannes.R
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.util.*
+
 
 /**
  * Display a dialog showing a full or partial (What's New) change log.
@@ -31,7 +34,7 @@ open class ChangeLog
         /**
          * Context that is used to access the resources and to create the ChangeLog dialogs.
          */
-        private val mContext: Context, preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext),
+        private val context: Context, preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
         /**
          * Contains the CSS rules used to format the change log.
          */
@@ -170,8 +173,8 @@ open class ChangeLog
 
         // Get current version code and version name
         try {
-            val packageInfo = mContext.packageManager.getPackageInfo(
-                    mContext.packageName, 0)
+            val packageInfo = context.packageManager.getPackageInfo(
+                    context.packageName, 0)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 currentVersionCode = packageInfo.longVersionCode.toInt()
@@ -209,19 +212,19 @@ open class ChangeLog
      * @return A dialog containing the (partial) change log.
      */
     protected fun getDialog(full: Boolean): AlertDialog {
-        val webView = WebView(mContext)
+        val webView = WebView(context)
         //wv.setBackgroundColor(0); // transparent
         webView.loadDataWithBaseURL(null, getLog(full), "text/html", "UTF-8", null)
 
-        val builder = AlertDialog.Builder(mContext)
+        val builder = AlertDialog.Builder(context)
         builder.setTitle(
-                mContext.resources.getString(
+                context.resources.getString(
                         if (full) R.string.changelog_full_title else R.string.changelog_title))
                 .setView(webView)
                 .setCancelable(false)
                 // OK button
                 .setPositiveButton(
-                        mContext.resources.getString(R.string.changelog_ok_button)
+                        context.resources.getString(R.string.changelog_ok_button)
                 ) { dialog, which ->
                     // The user clicked "OK" so save the current version code as
                     // "last version code".
@@ -241,7 +244,7 @@ open class ChangeLog
      * Write current version code to the preferences.
      */
     protected fun updateVersionInPreferences() {
-        val sp = PreferenceManager.getDefaultSharedPreferences(mContext)
+        val sp = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sp.edit()
         editor.putInt(VERSION_KEY, currentVersionCode)
         editor.apply()
@@ -261,7 +264,7 @@ open class ChangeLog
         sb.append(mCss)
         sb.append("</style></head><body>")
 
-        val versionFormat = mContext.resources.getString(R.string.changelog_version_format)
+        val versionFormat = context.resources.getString(R.string.changelog_version_format)
 
         val changelog = getChangeLog(full)
 
@@ -295,19 +298,29 @@ open class ChangeLog
         val masterChangelog = getMasterChangeLog(full)
         val changelog = getLocalizedChangeLog(full)
 
-        val mergedChangeLog = ArrayList<ReleaseItem>(masterChangelog.size())
+        val text = context.resources.openRawResource(R.raw.gitlog)
+                .bufferedReader().use { it.readText() }
 
-        var i = 0
-        val len = masterChangelog.size()
-        while (i < len) {
+
+        val gitListType = object : TypeToken<List<Gitlog>>() {}.type
+        val gitList = Gson().fromJson<List<Gitlog>>(text, gitListType)
+
+        val gitGroup = gitList.groupBy { it -> it.version }
+
+        val mergedChangeLog = ArrayList<ReleaseItem>(masterChangelog.size() + gitGroup.count())
+        gitGroup.filter { filter -> filter.value.count() > 0 }
+                .forEach {
+                    val list = it.value.map { item -> item.message.orEmpty() }
+                    val abc = ReleaseItem(99, it.value[0].version.orEmpty(), list)
+                    mergedChangeLog.add(abc)
+                }
+
+        for (i in 0 until masterChangelog.size()) {
             val key = masterChangelog.keyAt(i)
-
             // Use release information from localized change log and fall back to the master file
             // if necessary.
             val release = changelog.get(key, masterChangelog.get(key))
-
             mergedChangeLog.add(release)
-            i++
         }
 
         Collections.sort(mergedChangeLog, changeLogComparator)
@@ -343,7 +356,7 @@ open class ChangeLog
      * change log.
      */
     protected fun readChangeLogFromResource(resId: Int, full: Boolean): SparseArray<ReleaseItem> {
-        val xml = mContext.resources.getXml(resId)
+        val xml = context.resources.getXml(resId)
         try {
             return readChangeLog(xml, full)
         } finally {

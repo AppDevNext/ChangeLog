@@ -8,7 +8,7 @@
 This library provides an easy way to display a change log in your app.
 Without take care to VersionCode is necessary when you auto generate the VersionCode
 
-## Usage
+## Usage manuel XML
 
 1. Create the master change log in `res/xml/changelog_master.xml`. Formatted like this:
 
@@ -31,7 +31,16 @@ Without take care to VersionCode is necessary when you auto generate the Version
 2. Create translations of this `changelog_master.xml` file in files named `changelog.xml` under
 language-specific versions of `res/xml/`, e.g. `res/xml-de/changelog.xml`.
 
-3. Display the change log dialog by putting the following code in your activity's `onCreate()` method:
+## Usage git changelog
+To generate a git changelog, grouped by tag you can run
+
+`./generateTagGroupedGitlog.sh > sample/src/main/res/raw/gitlog.json`
+
+This will show it similar to the XML
+
+## Common usage
+
+1. Display the change log dialog by putting the following code in your activity's `onCreate()` method:
 
   ```java
   ChangeLog changelog = new ChangeLog(this);
@@ -46,7 +55,7 @@ The easiest way to add ckChangeLog to your project is via Gradle. Just add the f
 
 ```groovy
 dependencies {
-    implementation 'com.github.hannesa2:ChangeLog:1.0.0'
+    implementation 'com.github.hannesa2:ChangeLog:1.1.0'
 }
 ```
 
@@ -74,7 +83,7 @@ In order to change the labels of the dialog add the following items to your `str
 
 ## License
 
-    Copyright (C) 2012-2015 hannesa2 and contributors
+    Copyright (C) 2012-2019 hannesa2 and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
