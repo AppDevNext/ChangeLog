@@ -38,7 +38,7 @@ open class ChangeLog
         /**
          * Contains the CSS rules used to format the change log.
          */
-        protected val mCss: String = DEFAULT_CSS) {
+        protected val css: String = DEFAULT_CSS) {
 
     /**
      * Last version code read from `SharedPreferences` or [.NO_VERSION].
@@ -261,7 +261,7 @@ open class ChangeLog
         val sb = StringBuilder()
 
         sb.append("<html><head><style type=\"text/css\">")
-        sb.append(mCss)
+        sb.append(css)
         sb.append("</style></head><body>")
 
         val versionFormat = context.resources.getString(R.string.changelog_version_format)
@@ -299,8 +299,7 @@ open class ChangeLog
         val changelog = getLocalizedChangeLog(full)
 
         val text = context.resources.openRawResource(R.raw.gitlog)
-                .bufferedReader().use { it.readText() }
-
+                .bufferedReader().use { it.readText() }.replace("},]","}]")
 
         val gitListType = object : TypeToken<List<Gitlog>>() {}.type
         val gitList = Gson().fromJson<List<Gitlog>>(text, gitListType)
@@ -399,8 +398,8 @@ open class ChangeLog
     /**
      * Parse the `release` tag of a change log XML file.
      *
-     * @param xml       The `XmlPullParser` instance used to read the change log.
-     * @param full      If `true` the contents of the `release` tag are always added to
+     * @param xml           The `XmlPullParser` instance used to read the change log.
+     * @param fullVersion   If `true` the contents of the `release` tag are always added to
      * `changelog`. Otherwise only if the item's `versioncode` attribute is
      * higher than the last version code.
      * @param changelog The `SparseArray` to add a new [ReleaseItem] instance to.
