@@ -62,12 +62,12 @@ dependencies {
 To tell Gradle where to find the library, make sure `build.gradle` also contains this:
 
 ```groovy
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 ## Customize labels
