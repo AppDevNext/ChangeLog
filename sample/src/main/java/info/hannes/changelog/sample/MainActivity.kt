@@ -2,13 +2,13 @@ package info.hannes.changelog.sample
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import info.hannes.changelog.ChangeLog
 
-class MainActivity : FragmentActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
