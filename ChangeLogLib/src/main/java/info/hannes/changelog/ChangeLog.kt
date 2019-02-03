@@ -304,7 +304,7 @@ open class ChangeLog
         val gitListType = object : TypeToken<List<Gitlog>>() {}.type
         val gitList = Gson().fromJson<List<Gitlog>>(text, gitListType)
 
-        val gitGroup = gitList.groupBy { it -> it.version }
+        val gitGroup = gitList.groupBy { it.version }
 
         val mergedChangeLog = ArrayList<ReleaseItem>(masterChangelog.size() + gitGroup.count())
         gitGroup.filter { filter -> filter.value.count() > 0 }
