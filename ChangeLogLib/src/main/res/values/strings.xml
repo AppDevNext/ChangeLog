@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="changelog_full_title">Change Log</string>
     <string name="changelog_title">What\'s New</string>
     <string name="changelog_ok_button">OK</string>
     <string name="changelog_show_full">More…</string>
+    <string name="placeholder" translatable="false" />
+    <string name="app_name" translatable="false" />
+    <string name="log_send_mail_subject" tools:ignore="MissingTranslation">%1$s Logcat logger</string>
+    <string name="log_send_no_app" tools:ignore="MissingTranslation">No app found.</string>
 
     <string name="changelog_version_format">Version <xliff:g id="version_name">%s</xliff:g></string>
 </resources>
