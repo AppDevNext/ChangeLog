@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
@@ -15,6 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -41,14 +44,20 @@ class LogcatFragment : Fragment() {
             activity!!.actionBar!!.setDisplayHomeAsUpEnabled(true)
         }
         if (savedInstanceState == null) {
-            showLoadingDialog()
-
-            val task = LoadingLogcatTask()
-            task.execute()
+            showLogcat()
         }
 
         setHasOptionsMenu(true)
         return view
+    }
+
+    private fun showLogcat() = GlobalScope.launch(Dispatchers.Main) {
+        showLoadingDialog()
+        val logEntries = withContext(Dispatchers.Default) { readLogFile() }
+        logListAdapter = LogListAdapter(logEntries, currentFilter)
+        logsRecycler!!.adapter = logListAdapter
+        logsRecycler!!.scrollToPosition(logEntries.size - 1)
+        dismissLoadingDialog()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -176,60 +185,38 @@ class LogcatFragment : Fragment() {
 
     }
 
-    /**
-     * Class for loading the log data async
-     */
-    private inner class LoadingLogcatTask : AsyncTask<String, Void, ArrayList<String>>() {
+    private fun readLogFile(): ArrayList<String> {
+        val logList = ArrayList<String>()
+        try {
+            val process = Runtime.getRuntime().exec("logcat -dv time")
 
-        override fun doInBackground(vararg args: String): ArrayList<String> {
-            return readLogFile()
-        }
-
-        override fun onPostExecute(result: ArrayList<String>?) {
-            if (result != null) {
-                logListAdapter = LogListAdapter(result, currentFilter)
-                logsRecycler!!.adapter = logListAdapter
-                logsRecycler!!.scrollToPosition(result.size - 1)
-                dismissLoadingDialog()
-            }
-        }
-
-        /**
-         * Read and show log file info
-         */
-        private fun readLogFile(): ArrayList<String> {
-            val logList = ArrayList<String>()
-            try {
-                val process = Runtime.getRuntime().exec("logcat -dv time")
-
-                logList.addAll(
-                        process.inputStream.bufferedReader().use {
-                            it.readLines().map { line ->
-                                line.replace(" W/", " W: ")
-                                        .replace(" E/", " E: ")
-                                        .replace(" V/", " V: ")
-                                        .replace(" I/", " I: ")
-                                        .replace(" D/", " D: ")
-                            }
+            logList.addAll(
+                    process.inputStream.bufferedReader().use {
+                        it.readLines().map { line ->
+                            line.replace(" W/", " W: ")
+                                    .replace(" E/", " E: ")
+                                    .replace(" V/", " V: ")
+                                    .replace(" I/", " I: ")
+                                    .replace(" D/", " D: ")
                         }
-                )
+                    }
+            )
 
-            } catch (e: IOException) {
-                Log.e("LoadingLogcatTask", e.message)
-            }
-
-            return logList
+        } catch (e: IOException) {
+            Log.e("LoadingLogcatTask", e.message)
         }
+
+        return logList
     }
 
-    fun showLoadingDialog() {
+    private fun showLoadingDialog() {
         val loading = LoadingDialog.newInstance(false)
         val fm = this@LogcatFragment.activity!!.supportFragmentManager
         val ft = fm.beginTransaction()
         loading.show(ft, DIALOG_WAIT_TAG)
     }
 
-    fun dismissLoadingDialog() {
+    private fun dismissLoadingDialog() {
         val frag = this@LogcatFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG)
         if (frag != null) {
             val loading = frag as LoadingDialog?
