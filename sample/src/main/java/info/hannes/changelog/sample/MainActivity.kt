@@ -1,6 +1,7 @@
 package info.hannes.changelog.sample
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.Menu
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_full_changelog -> {
                 ChangeLog(this).fullLogDialog.show()
+            }
+            R.id.menu_logcat -> {
+                startActivity(Intent(this, LogcatActivity::class.java))
             }
         }
 
