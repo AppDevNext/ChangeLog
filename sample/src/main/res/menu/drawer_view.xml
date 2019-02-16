@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/example"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_whats_new"
+            android:title="@string/menu_whats_new"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/nav_full_changelog"
+            android:title="@string/menu_full_changelog"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/nav_logcat"
+            android:title="Logcat"
+            app:showAsAction="never" />
+
+    </group>
+
+    <group
+        android:id="@+id/other"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_other_github"
+            android:icon="@drawable/ic_github"
+            android:title="Github"/>
+
+        <item
+            android:id="@+id/nav_other_donate"
+            android:icon="@drawable/ic_money"
+            android:title="Donate"/>
+
+    </group>
+
+</menu>
