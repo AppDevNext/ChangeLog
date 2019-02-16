@@ -7,4 +7,13 @@
     <string name="menu_whats_new">What\'s New</string>
     <string name="menu_full_changelog">Full ChangeLog</string>
 
+    <!-- Purchase -->
+    <string name="demo_purchase"><![CDATA[
+        <b>Donate</b>
+    ]]></string>
+    <string name="purchase_cancel">Cancel</string>
+    <string name="demo_item_small_beer">Buy me a coffee</string>
+    <string name="demo_item_medium_beer">Buy me a toast</string>
+    <string name="demo_item_large_beer">Buy me a pizza</string>
+
 </resources>

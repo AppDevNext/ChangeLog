@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
@@ -13,10 +14,15 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import info.hannes.changelog.ChangeLog
+import info.hannes.changelog.sample.iabutils.IabHelper
+import info.hannes.changelog.sample.iabutils.IabResult
+import info.hannes.changelog.sample.iabutils.IabUtil
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
+
+    var helper: IabHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +46,28 @@ class MainActivity : AppCompatActivity() {
         if (changeLog.isFirstRun) {
             changeLog.logDialog.show()
         }
+
+        //payment
+
+        val base64EncodedPublicKey = IabUtil.key
+
+        // compute your public key and store it in base64EncodedPublicKey
+        helper = IabHelper(this, base64EncodedPublicKey)
+        helper?.enableDebugLogging(true)
+
+        helper?.startSetup(object : IabHelper.OnIabSetupFinishedListener {
+            override fun onIabSetupFinished(result: IabResult) {
+                if (!result.isSuccess) {
+                    // Oh noes, there was a problem.
+                    Log.d("Payment", "Problem setting up In-app Billing: $result")
+                    return
+                }
+
+                // Hooray, IAB is fully set up!
+                IabUtil.getInstance().retrieveData(helper)
+            }
+        })
+
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
@@ -58,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_full_changelog -> ChangeLog(this).fullLogDialog.show()
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
             R.id.nav_logcat -> startActivity(Intent(this, LogcatActivity::class.java))
-//            R.id.nav_other_donate -> IabUtil.showBeer(this, mHelper)
+            R.id.nav_other_donate -> IabUtil.showBeer(this, helper)
             R.id.nav_other_github -> {
                 val url = "https://github.com/hannesa2/ChangeLog"
                 val i = Intent(Intent.ACTION_VIEW)
