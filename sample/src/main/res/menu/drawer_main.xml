@@ -4,17 +4,17 @@
     tools:ignore="UnusedAttribute">
 
     <item
-        android:id="@+id/menu_whats_new"
+        android:id="@+id/nav_whats_new"
         android:title="@string/menu_whats_new"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_full_changelog"
+        android:id="@+id/nav_full_changelog"
         android:title="@string/menu_full_changelog"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_logcat"
+        android:id="@+id/nav_logcat"
         android:title="Logcat"
         app:showAsAction="never" />
 
