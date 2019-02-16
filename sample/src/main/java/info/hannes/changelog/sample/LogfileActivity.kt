@@ -3,10 +3,11 @@ package info.hannes.changelog.sample
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import info.hannes.logcat.LogcatFragment
+import info.hannes.logcat.LogfileFragment
+import info.hannes.timber.FileLoggingTree
 
 
-class LogcatActivity : AppCompatActivity() {
+class LogfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,7 @@ class LogcatActivity : AppCompatActivity() {
             }
 
             // Create a new Fragment to be placed in the activity layout
-            val firstFragment = LogcatFragment.newInstance("logcat.log")
+            val firstFragment = LogfileFragment.newInstance(FileLoggingTree.getFilername(), "logfile.log")
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments

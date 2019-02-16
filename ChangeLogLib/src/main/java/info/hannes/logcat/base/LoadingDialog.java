@@ -1,4 +1,4 @@
-package info.hannes.logcat;
+package info.hannes.logcat.base;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -37,7 +37,7 @@ public class LoadingDialog extends DialogFragment {
     }
 
     @SuppressWarnings("SameParameterValue")
-    static LoadingDialog newInstance(boolean cancelable) {
+    public static LoadingDialog newInstance(boolean cancelable) {
         LoadingDialog fragment = new LoadingDialog();
         Bundle args = new Bundle();
         args.putBoolean(CANCELABLE, cancelable);
@@ -78,14 +78,7 @@ public class LoadingDialog extends DialogFragment {
         dialog.setCancelable(cancelable);
         if (!cancelable) {
             // disable the back button
-            DialogInterface.OnKeyListener keyListener = new DialogInterface.OnKeyListener() {
-                @Override
-                public boolean onKey(DialogInterface dialog, int keyCode,
-                                     KeyEvent event) {
-
-                    return keyCode == KeyEvent.KEYCODE_BACK;
-                }
-            };
+            DialogInterface.OnKeyListener keyListener = (dialog1, keyCode, event) -> keyCode == KeyEvent.KEYCODE_BACK;
             dialog.setOnKeyListener(keyListener);
         }
         return dialog;

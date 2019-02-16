@@ -21,6 +21,11 @@
             android:title="Logcat"
             app:showAsAction="never" />
 
+        <item
+            android:id="@+id/nav_logfile"
+            android:title="Timber logfile"
+            app:showAsAction="never" />
+
     </group>
 
     <group

@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_full_changelog -> ChangeLog(this).fullLogDialog.show()
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
             R.id.nav_logcat -> startActivity(Intent(this, LogcatActivity::class.java))
-//            R.id.nav_other_donate -> IabUtil.showBeer(this, mHelper)
+            R.id.nav_logfile -> startActivity(Intent(this, LogfileActivity::class.java))
             R.id.nav_other_github -> {
                 val url = "https://github.com/hannesa2/ChangeLog"
                 val i = Intent(Intent.ACTION_VIEW)
@@ -86,6 +86,9 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.nav_logcat -> {
                 startActivity(Intent(this, LogcatActivity::class.java))
+            }
+            R.id.nav_logfile -> {
+                startActivity(Intent(this, LogfileActivity::class.java))
             }
         }
 

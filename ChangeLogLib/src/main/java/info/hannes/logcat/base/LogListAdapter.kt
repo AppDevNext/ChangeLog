@@ -1,4 +1,4 @@
-package info.hannes.logcat
+package info.hannes.logcat.base
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -50,6 +50,17 @@ class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String
      */
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
         holder.logContent.text = filterLogs[position]
+        filterLogs[position].let {
+            if (it.contains(" E: ") || it.startsWith("E: ")) {
+                holder.logContent.setTextColor(Color.RED)
+            } else if (it.contains(" W: ") || it.startsWith("W: ")) {
+                holder.logContent.setTextColor(Color.MAGENTA)
+            } else if (it.contains(" V: ") || it.startsWith("V: ")) {
+                holder.logContent.setTextColor(Color.GRAY)
+//        } else {
+//            holder.logContent.setTextColor(ContextCompat.getColor(context, R.color.primary_dark))
+            }
+        }
         if (filterLogs[position].contains(" E: ")) {
             holder.logContent.setTextColor(Color.RED)
         } else if (filterLogs[position].contains(" W: ")) {
