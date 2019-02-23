@@ -16,11 +16,6 @@
             android:title="@string/menu_full_changelog"
             app:showAsAction="never" />
 
-        <item
-            android:id="@+id/nav_logcat"
-            android:title="Logcat"
-            app:showAsAction="never" />
-
     </group>
 
     <group

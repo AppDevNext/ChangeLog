@@ -55,7 +55,7 @@ The easiest way to add ckChangeLog to your project is via Gradle. Just add the f
 
 ```groovy
 dependencies {
-    implementation 'com.github.hannesa2:ChangeLog:1.1.1'
+    implementation 'com.github.hannesa2:ChangeLog:1.3.0'
 }
 ```
 
