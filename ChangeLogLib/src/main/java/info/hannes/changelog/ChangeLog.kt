@@ -218,23 +218,21 @@ open class ChangeLog
 
         val builder = AlertDialog.Builder(context)
         builder.setTitle(
-                context.resources.getString(
-                        if (full) R.string.changelog_full_title else R.string.changelog_title))
+                context.resources.getString(if (full) R.string.changelog_full_title else R.string.changelog_title))
                 .setView(webView)
                 .setCancelable(false)
                 // OK button
                 .setPositiveButton(
                         context.resources.getString(R.string.changelog_ok_button)
-                ) { dialog, which ->
-                    // The user clicked "OK" so save the current version code as
-                    // "last version code".
+                ) { _, _ ->
+                    // The user clicked "OK" so save the current version code as "last version code".
                     updateVersionInPreferences()
                 }
 
         if (!full) {
             // Show "More…" button if we're only displaying a partial change log.
             builder.setNegativeButton(R.string.changelog_show_full
-            ) { dialog, id -> fullLogDialog.show() }
+            ) { _, _ -> fullLogDialog.show() }
         }
 
         return builder.create()
@@ -299,7 +297,7 @@ open class ChangeLog
         val changelog = getLocalizedChangeLog(full)
 
         val text = context.resources.openRawResource(R.raw.gitlog)
-                .bufferedReader().use { it.readText() }.replace("},]","}]")
+                .bufferedReader().use { it.readText() }.replace("},]", "}]")
 
         val gitListType = object : TypeToken<List<Gitlog>>() {}.type
         val gitList = Gson().fromJson<List<Gitlog>>(text, gitListType)
@@ -433,6 +431,7 @@ open class ChangeLog
         val changes = ArrayList<String>()
         while (eventType != XmlPullParser.END_TAG || xml.name == ChangeTag.NAME) {
             if (eventType == XmlPullParser.START_TAG && xml.name == ChangeTag.NAME) {
+                @Suppress("UNUSED_VALUE")
                 eventType = xml.next()
 
                 changes.add(xml.text)
@@ -451,9 +450,9 @@ open class ChangeLog
      */
     protected interface ReleaseTag {
         companion object {
-            val NAME = "release"
-            val ATTRIBUTE_VERSION = "version"
-            val ATTRIBUTE_VERSION_CODE = "versioncode"
+            const val NAME = "release"
+            const val ATTRIBUTE_VERSION = "version"
+            const val ATTRIBUTE_VERSION_CODE = "versioncode"
         }
     }
 
