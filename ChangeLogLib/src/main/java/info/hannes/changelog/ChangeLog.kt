@@ -300,7 +300,12 @@ open class ChangeLog
                 .bufferedReader().use { it.readText() }.replace("},]", "}]")
 
         val gitListType = object : TypeToken<List<Gitlog>>() {}.type
-        val gitList = Gson().fromJson<List<Gitlog>>(text, gitListType)
+        var gitList: List<Gitlog>? = Gson().fromJson<List<Gitlog>>(text, gitListType)
+
+        if (gitList == null) {
+            gitList = ArrayList()
+            Log.w("Log", "empty git log list")
+        }
 
         val gitGroup = gitList.groupBy { it.version }
 
