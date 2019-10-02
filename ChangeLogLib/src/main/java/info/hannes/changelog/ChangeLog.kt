@@ -211,7 +211,7 @@ open class ChangeLog
      * versions newer than the last version are displayed.
      * @return A dialog containing the (partial) change log.
      */
-    protected fun getDialog(full: Boolean): AlertDialog {
+    private fun getDialog(full: Boolean): AlertDialog {
         val webView = WebView(context)
         //wv.setBackgroundColor(0); // transparent
         webView.loadDataWithBaseURL(null, getLog(full), "text/html", "UTF-8", null)
