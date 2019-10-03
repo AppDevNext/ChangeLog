@@ -8,7 +8,6 @@ import android.os.Build
 import android.preference.PreferenceManager
 import android.util.Log
 import android.util.SparseArray
-import android.webkit.WebView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import info.hannes.R
@@ -212,7 +211,7 @@ open class ChangeLog
      * @return A dialog containing the (partial) change log.
      */
     private fun getDialog(full: Boolean): AlertDialog {
-        val webView = WebView(context)
+        val webView = LollipopFixedWebView(context)
         //wv.setBackgroundColor(0); // transparent
         webView.loadDataWithBaseURL(null, getLog(full), "text/html", "UTF-8", null)
 
