@@ -31,9 +31,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        if (navigationView != null) {
-            setupDrawerContent(navigationView)
+        findViewById<NavigationView>(R.id.nav_view)?.let {
+            setupDrawerContent(it)
         }
 
         val changeLog = ChangeLog(this)
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             mDrawerLayout.closeDrawers()
             true
         }
-
     }
 
     private fun selectNavigationItem(itemId: Int) {
@@ -57,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         when (itemId) {
             R.id.nav_full_changelog -> ChangeLog(this).fullLogDialog.show()
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
-//            R.id.nav_other_donate -> IabUtil.showBeer(this, mHelper)
             R.id.nav_other_github -> {
                 val url = "https://github.com/hannesa2/ChangeLog"
                 val i = Intent(Intent.ACTION_VIEW)
@@ -74,17 +71,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
-                mDrawerLayout.openDrawer(GravityCompat.START)
-            }
-            R.id.nav_whats_new -> {
-                DarkThemeChangeLog(this).logDialog.show()
-            }
-            R.id.nav_full_changelog -> {
-                ChangeLog(this).fullLogDialog.show()
-            }
+            android.R.id.home -> mDrawerLayout.openDrawer(GravityCompat.START)
+            R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
+            R.id.nav_full_changelog -> ChangeLog(this).fullLogDialog.show()
         }
-
         return true
     }
 
@@ -93,7 +83,7 @@ class MainActivity : AppCompatActivity() {
      */
     class DarkThemeChangeLog internal constructor(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.DarkTheme), DARK_THEME_CSS) {
         companion object {
-            internal val DARK_THEME_CSS = "body { color: #ffffff; background-color: #282828; }" + "\n" + ChangeLog.DEFAULT_CSS
+            internal val DARK_THEME_CSS = "body { color: #ffffff; background-color: #282828; }\n$DEFAULT_CSS"
         }
     }
 }
