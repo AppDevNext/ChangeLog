@@ -330,7 +330,7 @@ open class ChangeLog
     }
 
     /**
-     * Read master change log from `xml/changelog_master.xml`
+     * Read master change log from `xml/changelog.xml`
      *
      * @see .readChangeLogFromResource
      */
