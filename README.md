@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/hannesa2/ChangeLog.svg)](https://jitpack.io/#hannesa2/ChangeLog)
+[![](https://jitpack.io/v/AppDevNext/ChangeLog.svg)](https://jitpack.io/#AppDevNext/ChangeLog)
 
 # ChangeLog - An Android Library to display a Change Log without take care about VersionCode
 
@@ -55,7 +55,7 @@ The easiest way to add ckChangeLog to your project is via Gradle. Just add the f
 
 ```groovy
 dependencies {
-    implementation 'com.github.hannesa2:ChangeLog:3.2.0'
+    implementation 'com.github.AppDevNext:ChangeLog:3.2.0'
 }
 ```
 
@@ -83,7 +83,7 @@ In order to change the labels of the dialog add the following items to your `str
 
 ## License
 
-    Copyright (C) 2012-2019 hannesa2 and contributors
+    Copyright (C) 2012-2019 AppDevNext and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
