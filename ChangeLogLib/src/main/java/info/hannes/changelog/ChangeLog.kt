@@ -490,20 +490,20 @@ open class ChangeLog
         /**
          * Default CSS styles used to format the change log.
          */
-        val DEFAULT_CSS = "h1 { margin-left: 0px; font-size: 1.2em; }" + "\n" +
+        const val DEFAULT_CSS = "h1 { margin-left: 0px; font-size: 1.2em; }" + "\n" +
                 "li { margin-left: 0px; }" + "\n" +
                 "ul { padding-left: 2em; }"
         /**
          * Tag that is used when sending error/debug messages to the log.
          */
-        private val LOG_TAG = "ChangeLog"
+        private const val LOG_TAG = "ChangeLog"
         /**
          * This is the key used when storing the version code in SharedPreferences.
          */
-        protected val VERSION_KEY = "ChangeLog_last_version_code"
+        protected const val VERSION_KEY = "ChangeLog_last_version_code"
         /**
          * Constant that used when no version code is available.
          */
-        protected val NO_VERSION = -1
+        protected const val NO_VERSION = -1
     }
 }
