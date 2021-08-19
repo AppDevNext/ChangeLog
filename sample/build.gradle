@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion propCompileSdkVersion
+    compileSdkVersion 31
 
     defaultConfig {
         versionCode 1
         versionName "1.0"
 
         minSdkVersion 17
-        targetSdkVersion 29
+        targetSdkVersion 31
     }
 
     packagingOptions {

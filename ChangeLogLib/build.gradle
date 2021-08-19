@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion propCompileSdkVersion
+    compileSdkVersion 31
 
     defaultConfig {
         versionName "1.0.0"
