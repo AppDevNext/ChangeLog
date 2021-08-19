@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion propCompileSdkVersion
+    compileSdkVersion 31
 
     defaultConfig {
         versionName "1.0.0"
