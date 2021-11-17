@@ -2,4 +2,3 @@ jdk:
  - openjdk11
 install:
  - ./gradlew :ChangeLogLib:build :ChangeLogLib:publishToMavenLocal -x :ChangeLogLib:test
- - find . -name "*.aar"
