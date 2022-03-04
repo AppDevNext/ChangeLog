@@ -23,7 +23,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleDebug lint testDebugUnitTest
       - name: Archive Lint report
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: Lint-report
           path: sample/build/reports/lint-results.html
