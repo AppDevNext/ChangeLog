@@ -11,10 +11,12 @@ android {
         minSdkVersion 17
         targetSdkVersion 31
     }
-
     packagingOptions {
-        pickFirst 'META-INF/atomicfu.kotlin_module'
+        resources {
+            pickFirsts += ['META-INF/atomicfu.kotlin_module']
+        }
     }
+
 }
 
 dependencies {
