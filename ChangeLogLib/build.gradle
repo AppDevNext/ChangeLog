@@ -12,6 +12,7 @@ android {
         minSdkVersion 17
         project.archivesBaseName = "ChangeLog"
     }
+    namespace 'info.hannes'
 }
 
 dependencies {

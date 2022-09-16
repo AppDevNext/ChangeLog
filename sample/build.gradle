@@ -16,6 +16,7 @@ android {
             pickFirsts += ['META-INF/atomicfu.kotlin_module']
         }
     }
+    namespace 'info.hannes.changelog.sample'
 
 }
 
