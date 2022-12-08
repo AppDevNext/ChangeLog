@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/AppDevNext/ChangeLog.svg)](https://jitpack.io/#AppDevNext/ChangeLog)
 
-# ChangeLog - An Android Library to display a Change Log without take care about VersionCode
+# An Android Library to display a Change Log without take care about VersionCode
 
 ![Screenshot](screenshot_1.png)
 ![Screenshot](screenshot_2.png)
@@ -83,7 +83,7 @@ In order to change the labels of the dialog add the following items to your `str
 
 ## License
 
-    Copyright (C) 2012-2021 AppDevNext and contributors
+    Copyright (C) 2012-2023 AppDevNext and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
