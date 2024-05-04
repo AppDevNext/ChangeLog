@@ -2,22 +2,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33
-
+    namespace 'info.hannes.changelog.sample'
     defaultConfig {
         versionCode 1
         versionName "1.0"
 
+        compileSdk 34
         minSdkVersion 17
-        targetSdkVersion 33
+        targetSdkVersion 34
     }
     packagingOptions {
         resources {
             pickFirsts += ['META-INF/atomicfu.kotlin_module']
         }
     }
-    namespace 'info.hannes.changelog.sample'
-
 }
 
 dependencies {

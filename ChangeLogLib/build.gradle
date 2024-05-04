@@ -5,14 +5,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
-
+    namespace 'info.hannes'
     defaultConfig {
 
         minSdkVersion 17
+        compileSdk 34
         project.archivesBaseName = "ChangeLog"
     }
-    namespace 'info.hannes'
 }
 
 dependencies {
