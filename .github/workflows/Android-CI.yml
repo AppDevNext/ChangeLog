@@ -20,7 +20,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: 17
-      - uses: gradle/wrapper-validation-action@v1.0.6
+      - uses: gradle/wrapper-validation-action@v3.3.2
       - name: Build with Gradle
         run: ./gradlew assembleDebug lint testDebugUnitTest
       - name: Archive Lint report
