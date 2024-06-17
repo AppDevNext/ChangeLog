@@ -23,7 +23,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: ${{ matrix.java_version }}
-      - uses: gradle/wrapper-validation-action@v3.4.0
+      - uses: gradle/wrapper-validation-action@v3.4.2
       - name: Build with Gradle
         run: ./gradlew assembleDebug lint testDebugUnitTest
       - name: Archive Lint report
