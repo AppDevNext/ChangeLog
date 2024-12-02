@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import info.hannes.changelog.ChangeLog
+import info.hannes.changelog.ChangeLog.Companion.DEFAULT_CSS
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         findViewById<NavigationView>(R.id.nav_view)?.let {
             setupDrawerContent(it)
@@ -81,9 +82,9 @@ class MainActivity : AppCompatActivity() {
     /**
      * Example that shows how to create a themed dialog.
      */
-    class DarkThemeChangeLog internal constructor(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.DarkTheme), DARK_THEME_CSS) {
-        companion object {
-            internal val DARK_THEME_CSS = "body { color: #ffffff; background-color: #282828; }\n$DEFAULT_CSS"
-        }
+    class DarkThemeChangeLog internal constructor(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.DarkTheme), DARK_THEME_CSS)
+
+    companion object {
+        internal val DARK_THEME_CSS = "body { color: #ffffff; background-color: #282828; }\n$DEFAULT_CSS"
     }
 }

@@ -14,13 +14,9 @@ import info.hannes.R
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
-import java.util.*
+import java.util.Collections
 
 
-/**
- * Display a dialog showing a full or partial (What's New) change log.
- */
-open class ChangeLog
 /**
  * Create a `ChangeLog` instance using the supplied `SharedPreferences` instance.
  *
@@ -29,19 +25,19 @@ open class ChangeLog
  * @param css         CSS styles used to format the change log (excluding `<style>` and
  * `</style>`).
  */
-@JvmOverloads constructor(
-        /**
-         * Context that is used to access the resources and to create the ChangeLog dialogs.
-         */
-        private val context: Context, preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
-        /**
-         * Contains the CSS rules used to format the change log.
-         */
-        protected val css: String = DEFAULT_CSS) {
+open class ChangeLog @JvmOverloads constructor(
+    private val context: Context, preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
+    /**
+     * Contains the CSS rules used to format the change log.
+     */
+    protected val css: String = DEFAULT_CSS
+) {
 
     /**
      * Last version code read from `SharedPreferences` or [.NO_VERSION].
      */
+
+    // Get last version code
     /**
      * Get version code of last installation.
      *
@@ -51,7 +47,7 @@ open class ChangeLog
      * `ChangeLog` is instantiated).
      * @see [android:versionCode](http://developer.android.com/guide/topics/manifest/manifest-element.html.vcode)
      */
-    val lastVersionCode: Int
+    val lastVersionCode: Int = preferences.getInt(VERSION_KEY, NO_VERSION)
 
     /**
      * Version code of the current installation.
@@ -166,14 +162,8 @@ open class ChangeLog
     constructor(context: Context, css: String) : this(context, PreferenceManager.getDefaultSharedPreferences(context), css) {}
 
     init {
-
-        // Get last version code
-        lastVersionCode = preferences.getInt(VERSION_KEY, NO_VERSION)
-
-        // Get current version code and version name
         try {
-            val packageInfo = context.packageManager.getPackageInfo(
-                    context.packageName, 0)
+            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 currentVersionCode = packageInfo.longVersionCode.toInt()
@@ -192,11 +182,7 @@ open class ChangeLog
     /**
      * Skip the "What's new" dialog for this app version.
      *
-     *
-     *
-     *
-     * Future calls to [.isFirstRun] and [.isFirstRunEver] will return `false`
-     * for the current app version.
+     * Future calls to [.isFirstRun] and [.isFirstRunEver] will return `false` for the current app version.
      *
      */
     fun skipLogDialog() {
@@ -217,20 +203,22 @@ open class ChangeLog
 
         val builder = AlertDialog.Builder(context)
         builder.setTitle(
-                context.resources.getString(if (full) R.string.changelog_full_title else R.string.changelog_title))
-                .setView(webView)
-                .setCancelable(false)
-                // OK button
-                .setPositiveButton(
-                        context.resources.getString(R.string.changelog_ok_button)
-                ) { _, _ ->
-                    // The user clicked "OK" so save the current version code as "last version code".
-                    updateVersionInPreferences()
-                }
+            context.resources.getString(if (full) R.string.changelog_full_title else R.string.changelog_title)
+        )
+            .setView(webView)
+            .setCancelable(false)
+            // OK button
+            .setPositiveButton(
+                context.resources.getString(R.string.changelog_ok_button)
+            ) { _, _ ->
+                // The user clicked "OK" so save the current version code as "last version code".
+                updateVersionInPreferences()
+            }
 
         if (!full) {
             // Show "More…" button if we're only displaying a partial change log.
-            builder.setNegativeButton(R.string.changelog_show_full
+            builder.setNegativeButton(
+                R.string.changelog_show_full
             ) { _, _ -> fullLogDialog.show() }
         }
 
@@ -296,7 +284,7 @@ open class ChangeLog
         val changelog = getLocalizedChangeLog(full)
 
         val text = context.resources.openRawResource(R.raw.gitlog)
-                .bufferedReader().use { it.readText() }.replace("},]", "}]")
+            .bufferedReader().use { it.readText() }.replace("},]", "}]")
 
         val gitListType = object : TypeToken<List<Gitlog>>() {}.type
         var gitList: List<Gitlog>? = Gson().fromJson<List<Gitlog>>(text, gitListType)
@@ -310,11 +298,11 @@ open class ChangeLog
 
         val mergedChangeLog = ArrayList<ReleaseItem>(masterChangelog.size() + gitGroup.count())
         gitGroup.filter { filter -> filter.value.count() > 0 }
-                .forEach {
-                    val list = it.value.map { item -> item.message.orEmpty() }
-                    val abc = ReleaseItem(99, it.value[0].version.orEmpty(), list)
-                    mergedChangeLog.add(abc)
-                }
+            .forEach {
+                val list = it.value.map { item -> item.message.orEmpty() }
+                val abc = ReleaseItem(99, it.value[0].version.orEmpty(), list)
+                mergedChangeLog.add(abc)
+            }
 
         for (i in 0 until masterChangelog.size()) {
             val key = masterChangelog.keyAt(i)
@@ -473,18 +461,19 @@ open class ChangeLog
      * Container used to store information about a release/version.
      */
     class ReleaseItem internal constructor(
-            /**
-             * Version code of the release.
-             */
-            val versionCode: Int,
-            /**
-             * Version name of the release.
-             */
-            val versionName: String,
-            /**
-             * List of changes introduced with that release.
-             */
-            val changes: List<String>)
+        /**
+         * Version code of the release.
+         */
+        val versionCode: Int,
+        /**
+         * Version name of the release.
+         */
+        val versionName: String,
+        /**
+         * List of changes introduced with that release.
+         */
+        val changes: List<String>
+    )
 
     companion object {
         /**
@@ -493,14 +482,17 @@ open class ChangeLog
         const val DEFAULT_CSS = "h1 { margin-left: 0px; font-size: 1.2em; }" + "\n" +
                 "li { margin-left: 0px; }" + "\n" +
                 "ul { padding-left: 2em; }"
+
         /**
          * Tag that is used when sending error/debug messages to the log.
          */
         private const val LOG_TAG = "ChangeLog"
+
         /**
          * This is the key used when storing the version code in SharedPreferences.
          */
         protected const val VERSION_KEY = "ChangeLog_last_version_code"
+
         /**
          * Constant that used when no version code is available.
          */
