@@ -34,7 +34,7 @@ language-specific versions of `res/xml/`, e.g. `res/xml-de/changelog.xml`.
 ## Usage git changelog
 To generate a git changelog, grouped by tag you can run
 
-`./generateTagGroupedGitlog.sh > sample/src/main/res/raw/gitlog.json`
+`./generateTagGroupedGitlog.sh > app/src/main/res/raw/gitlog.json`
 
 This will show it similar to the XML
 

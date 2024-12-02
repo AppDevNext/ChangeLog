@@ -1,2 +1,2 @@
 include ':ChangeLogLib'
-include ':sample'
+include ':app'
