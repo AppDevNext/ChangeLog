@@ -30,19 +30,12 @@ open class ChangeLog @JvmOverloads constructor(
     preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
     protected val css: String = DEFAULT_CSS
 ) {
-
-    /**
-     * Last version code read from `SharedPreferences` or [.NO_VERSION].
-     */
-
-    // Get last version code
     /**
      * Get version code of last installation.
      *
      * @return The version code of the last installation of this app (as described in the former
      * manifest). This will be the same as returned by [.getCurrentVersionCode] the
-     * second time this version of the app is launched (more precisely: the second time
-     * `ChangeLog` is instantiated).
+     * second time this version of the app is launched (more precisely: the second time ChangeLog` is instantiated).
      * @see [android:versionCode](http://developer.android.com/guide/topics/manifest/manifest-element.html.vcode)
      */
     val lastVersionCode: Int = preferences.getInt(VERSION_KEY, NO_VERSION)
