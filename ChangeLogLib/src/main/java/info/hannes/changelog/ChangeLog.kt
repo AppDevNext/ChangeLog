@@ -28,7 +28,8 @@ import java.util.Collections
 open class ChangeLog @JvmOverloads constructor(
     private val context: Context,
     preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
-    protected val css: String = DEFAULT_CSS
+    protected val css: String = DEFAULT_CSS,
+    val callback: (() -> Unit)? = null
 ) {
     /**
      * Get version code of last installation.
@@ -208,6 +209,7 @@ open class ChangeLog @JvmOverloads constructor(
             ) { _, _ ->
                 // The user clicked "OK" so save the current version code as "last version code".
                 updateVersionInPreferences()
+                callback?.invoke()
             }
 
         if (!full) {
