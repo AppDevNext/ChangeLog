@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
@@ -36,7 +37,9 @@ class MainActivity : AppCompatActivity() {
             setupDrawerContent(it)
         }
 
-        val changeLog = ChangeLog(this)
+        val changeLog = ChangeLog(this, callback = {
+            Log.d("log", "dialog dismiss")
+        })
         if (changeLog.isFirstRun) {
             changeLog.logDialog.show()
         }
@@ -54,7 +57,10 @@ class MainActivity : AppCompatActivity() {
     private fun selectNavigationItem(itemId: Int) {
 
         when (itemId) {
-            R.id.nav_full_changelog -> ChangeLog(this).fullLogDialog.show()
+            R.id.nav_full_changelog -> ChangeLog(this, callback = {
+                Log.d("log", "dialog dismiss")
+            }).fullLogDialog.show()
+
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
             R.id.nav_other_github -> {
                 val url = "https://github.com/hannesa2/ChangeLog"
@@ -74,7 +80,9 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             android.R.id.home -> mDrawerLayout.openDrawer(GravityCompat.START)
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
-            R.id.nav_full_changelog -> ChangeLog(this).fullLogDialog.show()
+            R.id.nav_full_changelog -> ChangeLog(this, callback = {
+                Log.d("log", "dialog dismiss")
+            }).fullLogDialog.show()
         }
         return true
     }
@@ -82,7 +90,12 @@ class MainActivity : AppCompatActivity() {
     /**
      * Example that shows how to create a themed dialog.
      */
-    class DarkThemeChangeLog internal constructor(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.DarkTheme), DARK_THEME_CSS)
+    class DarkThemeChangeLog internal constructor(context: Context) : ChangeLog(
+        ContextThemeWrapper(context, R.style.DarkTheme),
+        css = DARK_THEME_CSS,
+        callback = {
+            Log.d("DarkThemeChangeLog", "dialog dismiss")
+        })
 
     companion object {
         internal val DARK_THEME_CSS = "body { color: #ffffff; background-color: #282828; }\n$DEFAULT_CSS"
