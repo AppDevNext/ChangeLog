@@ -26,10 +26,8 @@ import java.util.Collections
  * `</style>`).
  */
 open class ChangeLog @JvmOverloads constructor(
-    private val context: Context, preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
-    /**
-     * Contains the CSS rules used to format the change log.
-     */
+    private val context: Context,
+    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
     protected val css: String = DEFAULT_CSS
 ) {
 
@@ -203,9 +201,13 @@ open class ChangeLog @JvmOverloads constructor(
 
         val builder = AlertDialog.Builder(context)
         builder.setTitle(
-            context.resources.getString(if (full) R.string.changelog_full_title else R.string.changelog_title)
-        )
-            .setView(webView)
+            context.resources.getString(
+                if (full)
+                    R.string.changelog_full_title
+                else
+                    R.string.changelog_title
+            )
+        )    .setView(webView)
             .setCancelable(false)
             // OK button
             .setPositiveButton(
