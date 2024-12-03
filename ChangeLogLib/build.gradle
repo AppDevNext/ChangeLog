@@ -8,7 +8,7 @@ android {
     namespace 'info.hannes'
     defaultConfig {
 
-        minSdkVersion 19
+        minSdkVersion 21
         compileSdk 34
         project.archivesBaseName = "ChangeLog"
     }
