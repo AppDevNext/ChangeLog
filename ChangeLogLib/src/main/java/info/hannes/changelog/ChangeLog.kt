@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager.NameNotFoundException
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.preference.PreferenceManager
 import android.util.Log
 import android.util.SparseArray
@@ -216,7 +218,7 @@ open class ChangeLog @JvmOverloads constructor(
             // Show "More…" button if we're only displaying a partial change log.
             builder.setNegativeButton(
                 R.string.changelog_show_full
-            ) { _, _ -> fullLogDialog.show() }
+            ) { _, _ -> Handler(Looper.getMainLooper()).post{fullLogDialog.show()} }
         }
 
         return builder.create()
