@@ -19,6 +19,17 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 17
+      - name: Check pre-release
+        run: |
+          echo "tag=${{steps.tagger.outputs.tag}}"
+          if [[ ${{ steps.tagger.outputs.tag }} == *alpha* || ${{ steps.tagger.outputs.tag }} == *beta* ]]
+          then
+             prerelease=true
+          else
+             prerelease=false
+          fi
+          echo "PRE_RELEASE=$prerelease" >> $GITHUB_ENV
+          echo "prerelease=$prerelease"
       - name: Install Android SDK
         uses: malinskiy/action-android/install-sdk@release/0.1.3
       - name: Build project
