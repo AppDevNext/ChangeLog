@@ -8,17 +8,18 @@ on:
 jobs:
   build:
     name: Publish release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install JDK ${{ matrix.java_version }}
-        uses: actions/setup-java@v4
+      - name: Find Tag
+        id: tagger
+        uses: jimschubert/query-tag-action@v2
         with:
-          distribution: 'adopt'
-          java-version: 17
+          skip-unshallow: 'true'
+          commit-ish: HEAD
       - name: Check pre-release
         run: |
           echo "tag=${{steps.tagger.outputs.tag}}"
@@ -30,12 +31,17 @@ jobs:
           fi
           echo "PRE_RELEASE=$prerelease" >> $GITHUB_ENV
           echo "prerelease=$prerelease"
+      - name: Install JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: 17
       - name: Install Android SDK
-        uses: malinskiy/action-android/install-sdk@release/0.1.3
+        uses: hannesa2/action-android/install-sdk@0.1.16.7
       - name: Build project
         run: ./gradlew assembleRelease
         env:
-          VERSION: ${{ github.ref }}
+          VERSION: ${{steps.tagger.outputs.tag}}
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
