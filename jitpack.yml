@@ -1,4 +1,4 @@
 jdk:
- - openjdk11
+ - openjdk17
 install:
  - ./gradlew :ChangeLogLib:build :ChangeLogLib:publishToMavenLocal -x :ChangeLogLib:test
