@@ -1,8 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
 
 android {
-    namespace 'info.hannes.changelog.sample'
+    namespace "info.hannes.changelog.sample"
     defaultConfig {
         versionCode 1
         versionName "1.0"
@@ -13,7 +13,7 @@ android {
     }
     packagingOptions {
         resources {
-            pickFirsts += ['META-INF/atomicfu.kotlin_module']
+            pickFirsts += ["META-INF/atomicfu.kotlin_module"]
         }
     }
 
@@ -22,13 +22,13 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-    implementation project(':ChangeLogLib')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation project(":ChangeLogLib")
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
