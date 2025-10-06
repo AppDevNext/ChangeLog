@@ -50,6 +50,6 @@ jobs:
           prerelease: ${{ env.PRE_RELEASE }}
           name: ${{steps.tagger.outputs.tag}}
           files: |
-            ./ChangeLogLib/build/outputs/aar/ChangeLog-release.aar
+            ./ChangeLogLib/build/outputs/aar/*-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,11 +12,12 @@ import android.util.Log
 import android.util.SparseArray
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import info.hannes.R
+import info.hannes.changeloglib.R
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.util.Collections
+import androidx.core.util.size
 
 
 /**
@@ -295,7 +296,7 @@ open class ChangeLog @JvmOverloads constructor(
 
         val gitGroup = gitList.groupBy { it.version }
 
-        val mergedChangeLog = ArrayList<ReleaseItem>(masterChangelog.size() + gitGroup.count())
+        val mergedChangeLog = ArrayList<ReleaseItem>(masterChangelog.size + gitGroup.count())
         gitGroup.filter { filter -> filter.value.count() > 0 }
             .forEach {
                 val list = it.value.map { item -> item.message.orEmpty() }
@@ -303,7 +304,7 @@ open class ChangeLog @JvmOverloads constructor(
                 mergedChangeLog.add(abc)
             }
 
-        for (i in 0 until masterChangelog.size()) {
+        for (i in 0 until masterChangelog.size) {
             val key = masterChangelog.keyAt(i)
             // Use release information from localized change log and fall back to the master file
             // if necessary.
@@ -409,7 +410,7 @@ open class ChangeLog @JvmOverloads constructor(
         try {
             val versionCodeStr = xml.getAttributeValue(null, ReleaseTag.ATTRIBUTE_VERSION_CODE)
             versionCode = Integer.parseInt(versionCodeStr)
-        } catch (e: NumberFormatException) {
+        } catch (_: NumberFormatException) {
             versionCode = NO_VERSION
             full = true
         }
@@ -423,7 +424,6 @@ open class ChangeLog @JvmOverloads constructor(
         while (eventType != XmlPullParser.END_TAG || xml.name == ChangeTag.NAME) {
             if (eventType == XmlPullParser.START_TAG && xml.name == ChangeTag.NAME) {
                 @Suppress("UNUSED_VALUE")
-                eventType = xml.next()
 
                 changes.add(xml.text)
             }
