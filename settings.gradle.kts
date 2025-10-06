@@ -1,0 +1,2 @@
+include(":ChangeLogLib")
+include(":app")
