@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("maven-publish")
-    kotlin("plugin.serialization") version "1.9.20"
+    kotlin("plugin.serialization") version "2.2.20"
 }
 
 android {
