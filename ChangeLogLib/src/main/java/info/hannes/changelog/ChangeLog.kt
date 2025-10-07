@@ -9,15 +9,15 @@ import android.os.Handler
 import android.os.Looper
 import android.preference.PreferenceManager
 import android.util.Log
+import android.util.Log.i
 import android.util.SparseArray
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import info.hannes.changeloglib.R
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.util.Collections
 import androidx.core.util.size
+import kotlinx.serialization.json.Json
 
 
 /**
@@ -283,16 +283,10 @@ open class ChangeLog @JvmOverloads constructor(
         val masterChangelog = getMasterChangeLog(full)
         val changelog = getLocalizedChangeLog(full)
 
-        val text = context.resources.openRawResource(R.raw.gitlog)
-            .bufferedReader().use { it.readText() }.replace("},]", "}]")
+        val jsonString = context.resources.openRawResource(R.raw.gitlog)
+            .bufferedReader().use { it.readText() }//.replace("},]", "}]")
 
-        val gitListType = object : TypeToken<List<Gitlog>>() {}.type
-        var gitList: List<Gitlog>? = Gson().fromJson<List<Gitlog>>(text, gitListType)
-
-        if (gitList == null) {
-            gitList = ArrayList()
-            Log.w("Log", "empty git log list")
-        }
+        val gitList = Json.decodeFromString<List<Gitlog>>(jsonString)
 
         val gitGroup = gitList.groupBy { it.version }
 

@@ -1,21 +1,11 @@
 package info.hannes.changelog
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-class Gitlog {
-
-    @SerializedName("version")
-    @Expose
-    var version: String? = null
-    @SerializedName("code")
-    @Expose
-    var code: String? = null
-    @SerializedName("date")
-    @Expose
-    var date: String? = null
-    @SerializedName("message")
-    @Expose
+@Serializable
+data class Gitlog(
+    var version: String? = null,
+    var code: Int? = 0,
+    var date: String? = null,
     var message: String? = null
-
-}
+)
