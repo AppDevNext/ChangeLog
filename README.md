@@ -32,9 +32,27 @@ Without take care to VersionCode is necessary when you auto generate the Version
 language-specific versions of `res/xml/`, e.g. `res/xml-de/changelog.xml`.
 
 ## Usage git changelog
-To generate a git changelog, grouped by tag you can run
+To generate a git changelog, grouped by tag you can run `getTagGroupedGitlog` e.g
 
-`./generateTagGroupedGitlog.sh > app/src/main/res/raw/gitlog.json`
+```kts
+afterEvaluate {
+    tasks.named("generateReleaseResources") {
+        doLast {
+            getTagGroupedGitlog(
+                verbose = true,
+                filter = "RELEASE", // optional, only include tags with "RELEASE" in their name
+                filename = "app/src/main/res/raw/gitlog.json"
+            )
+        }
+    }
+}
+```
+
+or by shell script
+
+```#!/bin/bash
+./generateTagGroupedGitlog.sh > app/src/main/res/raw/gitlog.json
+```
 
 This will show it similar to the XML
 
@@ -42,10 +60,10 @@ This will show it similar to the XML
 
 1. Display the change log dialog by putting the following code in your activity's `onCreate()` method:
 
-  ```java
-  ChangeLog changelog = new ChangeLog(this);
+  ```kt
+  val changelog = ChangeLog(this)
   if (changelog.isFirstRun()) {
-      changelog.getLogDialog().show();
+      changelog.getLogDialog().show()
   }
   ```
 
@@ -53,19 +71,18 @@ This will show it similar to the XML
 
 The easiest way to add ChangeLog to your project is via Gradle. Just add the following lines to your `build.gradle`:
 
-```groovy
+```kts
 dependencies {
-    implementation 'com.github.AppDevNext:ChangeLog:$latestVersion'
+    implementation("com.github.AppDevNext:ChangeLog:$latestVersion")
 }
 ```
 
 To tell Gradle where to find the library, make sure `build.gradle` also contains this:
 
-```groovy
+```kts
 allprojects {
     repositories {
-        ...
-        maven { url 'https://jitpack.io' }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 ```
@@ -83,7 +100,7 @@ In order to change the labels of the dialog add the following items to your `str
 
 ## License
 
-    Copyright (C) 2012-2023 AppDevNext and contributors
+    Copyright (C) 2012-2025 AppDevNext and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
