@@ -9,15 +9,14 @@ import android.os.Handler
 import android.os.Looper
 import android.preference.PreferenceManager
 import android.util.Log
-import android.util.Log.i
 import android.util.SparseArray
+import androidx.core.util.size
 import info.hannes.changeloglib.R
+import kotlinx.serialization.json.Json
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.util.Collections
-import androidx.core.util.size
-import kotlinx.serialization.json.Json
 
 
 /**
@@ -160,11 +159,11 @@ open class ChangeLog @JvmOverloads constructor(
         try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                currentVersionCode = packageInfo.longVersionCode.toInt()
+            currentVersionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                packageInfo.longVersionCode.toInt()
             } else {
                 @Suppress("DEPRECATION")
-                currentVersionCode = packageInfo.versionCode
+                packageInfo.versionCode
             }
             currentVersionName = packageInfo.versionName
         } catch (e: NameNotFoundException) {
@@ -204,7 +203,7 @@ open class ChangeLog @JvmOverloads constructor(
                 else
                     R.string.changelog_title
             )
-        )    .setView(webView)
+        ).setView(webView)
             .setCancelable(false)
             // OK button
             .setPositiveButton(
@@ -219,7 +218,7 @@ open class ChangeLog @JvmOverloads constructor(
             // Show "More…" button if we're only displaying a partial change log.
             builder.setNegativeButton(
                 R.string.changelog_show_full
-            ) { _, _ -> Handler(Looper.getMainLooper()).post{fullLogDialog.show()} }
+            ) { _, _ -> Handler(Looper.getMainLooper()).post { fullLogDialog.show() } }
         }
 
         return builder.create()

@@ -2,7 +2,6 @@ package info.hannes.changelog.sample
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.ContextThemeWrapper
@@ -15,16 +14,17 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import info.hannes.changelog.ChangeLog
 import info.hannes.changelog.ChangeLog.Companion.DEFAULT_CSS
+import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mDrawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             selectNavigationItem(menuItem.itemId)
-            mDrawerLayout.closeDrawers()
+            drawerLayout.closeDrawers()
             true
         }
     }
@@ -64,9 +64,9 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
             R.id.nav_other_github -> {
                 val url = "https://github.com/hannesa2/ChangeLog"
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
-                startActivity(i)
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = url.toUri()
+                startActivity(intent)
             }
         }
     }
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> mDrawerLayout.openDrawer(GravityCompat.START)
+            android.R.id.home -> drawerLayout.openDrawer(GravityCompat.START)
             R.id.nav_whats_new -> DarkThemeChangeLog(this).logDialog.show()
             R.id.nav_full_changelog -> ChangeLog(this, callback = {
                 Log.d("log", "dialog dismiss")

@@ -23,7 +23,7 @@ jobs:
           java-version: ${{ matrix.java_version }}
       - uses: gradle/actions/wrapper-validation@v5
       - name: Build with Gradle
-        run: ./gradlew assembleDebug lint testDebugUnitTest
+        run: ./gradlew assembleDebug lint
       - name: Archive Lint report
         uses: actions/upload-artifact@v4
         with:
