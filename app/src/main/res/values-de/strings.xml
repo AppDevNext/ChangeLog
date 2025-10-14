@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ckChangeLog Beispiel</string>
+    <string name="app_name">ChangeLog Beispiel</string>
 
     <string name="menu_whats_new">Das ist neu</string>
     <string name="menu_full_changelog">Alle Änderungen</string>

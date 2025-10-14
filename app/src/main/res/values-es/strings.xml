@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ckChangeLog Muestra</string>
+    <string name="app_name">ChangeLog Sample</string>
 
     <string name="menu_whats_new">Qué hay de nuevo</string>
     <string name="menu_full_changelog">Registro completo de cambios</string>

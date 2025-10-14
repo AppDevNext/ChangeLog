@@ -51,7 +51,7 @@ This will show it similar to the XML
 
 ## Include the library
 
-The easiest way to add ckChangeLog to your project is via Gradle. Just add the following lines to your `build.gradle`:
+The easiest way to add ChangeLog to your project is via Gradle. Just add the following lines to your `build.gradle`:
 
 ```groovy
 dependencies {

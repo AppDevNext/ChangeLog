@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation,UnusedResources">
-    <!-- Meta data to make ckChangeLog show up when using AboutLibraries - https://github.com/mikepenz/AboutLibraries -->
-    <string name="define_ckChangeLog"/>
-    <string name="library_ckChangeLog_author">hannesa2</string>
-    <string name="library_ckChangeLog_authorWebsite">http://hannes.homeftp.org/</string>
-    <string name="library_ckChangeLog_libraryName">ckChangeLog</string>
-    <string name="library_ckChangeLog_libraryDescription">An Android Library to display a Change Log</string>
-    <string name="library_ckChangeLog_libraryVersion">1.2.2</string>
-    <string name="library_ckChangeLog_libraryWebsite">https://github.com/hannesa2/ckChangeLog</string>
-    <string name="library_ckChangeLog_licenseVersion">Apache Version 2.0</string>
-    <string name="library_ckChangeLog_licenseId">apache_2_0</string>
-    <string name="library_ckChangeLog_isOpenSource">true</string>
-    <string name="library_ckChangeLog_repositoryLink">https://github.com/hannesa2/ckChangeLog</string>
+    <string name="library_ChangeLog_author">hannesa2</string>
+    <string name="library_ChangeLog_authorWebsite">http://hannes.homeftp.org/</string>
+    <string name="library_ChangeLog_libraryName">ChangeLog</string>
+    <string name="library_ChangeLog_libraryDescription">An Android Library to display a Change Log</string>
+    <string name="library_ChangeLog_libraryWebsite">https://github.com/AppDevNext</string>
+    <string name="library_ChangeLog_licenseVersion">Apache Version 2.0</string>
+    <string name="library_ChangeLog_licenseId">apache_2_0</string>
+    <string name="library_ChangeLog_isOpenSource">true</string>
+    <string name="library_ChangeLog_repositoryLink">https://github.com/AppDevNext/ChangeLog</string>
 </resources>
