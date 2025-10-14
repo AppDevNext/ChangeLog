@@ -22,6 +22,10 @@ android {
             languageVersion.set(JavaLanguageVersion.of(17))
         }
     }
+    publishing {
+        singleVariant("release") {
+        }
+    }
 }
 
 dependencies {
