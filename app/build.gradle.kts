@@ -1,3 +1,5 @@
+import info.git.versionHelper.getTagGroupedGitlog
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -36,3 +38,21 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.20")
 }
 
+afterEvaluate {
+    tasks.named("generateReleaseResources") {
+        doLast {
+            getTagGroupedGitlog(
+                filename = "app/src/main/res/raw/gitlog.json"
+            )
+        }
+    }
+
+    tasks.named("generateDebugResources") {
+        doLast {
+            getTagGroupedGitlog(
+                verbose = true,
+                filename = project.projectDir.absolutePath + "/src/main/res/raw/gitlog.json"
+            )
+        }
+    }
+}

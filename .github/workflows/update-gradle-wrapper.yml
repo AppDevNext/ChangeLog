@@ -10,6 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          submodules: true
+          fetch-depth: 0
+          fetch-tags: true
       - name: Install JDK
         uses: actions/setup-java@v5
         with:
