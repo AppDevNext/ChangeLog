@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/AppDevNext/ChangeLog.svg)](https://jitpack.io/#AppDevNext/ChangeLog)
 
-# An Android Library to display a Change Log without take care about VersionCode
+# An Android Library to display a Change Log grouped by version(/tags)
 
 ![Screenshot](screenshot_1.png)
 ![Screenshot](screenshot_2.png)
