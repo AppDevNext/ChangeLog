@@ -42,7 +42,8 @@ afterEvaluate {
     tasks.named("generateReleaseResources") {
         doLast {
             getTagGroupedGitlog(
-                filename = "app/src/main/res/raw/gitlog.json"
+                filename = "app/src/main/res/raw/gitlog.json",
+                logger = this.logger
             )
         }
     }
@@ -50,8 +51,8 @@ afterEvaluate {
     tasks.named("generateDebugResources") {
         doLast {
             getTagGroupedGitlog(
-                verbose = true,
-                filename = project.projectDir.absolutePath + "/src/main/res/raw/gitlog.json"
+                filename = project.projectDir.absolutePath + "/src/main/res/raw/gitlog.json",
+                logger = this.logger
             )
         }
     }
