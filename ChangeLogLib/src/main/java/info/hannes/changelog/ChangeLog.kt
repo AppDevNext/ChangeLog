@@ -417,6 +417,7 @@ open class ChangeLog @JvmOverloads constructor(
         while (eventType != XmlPullParser.END_TAG || xml.name == ChangeTag.NAME) {
             if (eventType == XmlPullParser.START_TAG && xml.name == ChangeTag.NAME) {
                 @Suppress("UNUSED_VALUE")
+                eventType = xml.next()
 
                 changes.add(xml.text)
             }
