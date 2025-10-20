@@ -279,8 +279,8 @@ open class ChangeLog @JvmOverloads constructor(
      * @see .getChangeLogComparator
      */
     fun getChangeLog(full: Boolean): List<ReleaseItem> {
-        val masterChangelog = getMasterChangeLog(full)
-        val changelog = getLocalizedChangeLog(full)
+        val masterChangelog = readChangeLogFromResource(R.xml.changelog_master, full)
+        val changelog = readChangeLogFromResource(R.xml.changelog, full)
 
         val jsonString = context.resources.openRawResource(R.raw.gitlog)
             .bufferedReader().use { it.readText() }//.replace("},]", "}]")
@@ -311,34 +311,16 @@ open class ChangeLog @JvmOverloads constructor(
     }
 
     /**
-     * Read master change log from `xml/changelog.xml`
-     *
-     * @see .readChangeLogFromResource
-     */
-    protected fun getMasterChangeLog(full: Boolean): SparseArray<ReleaseItem> {
-        return readChangeLogFromResource(R.xml.changelog_master, full)
-    }
-
-    /**
-     * Read localized change log from `xml[-lang]/changelog.xml`
-     *
-     * @see .readChangeLogFromResource
-     */
-    protected fun getLocalizedChangeLog(full: Boolean): SparseArray<ReleaseItem> {
-        return readChangeLogFromResource(R.xml.changelog, full)
-    }
-
-    /**
      * Read change log from XML resource file.
      *
-     * @param resId Resource ID of the XML file to read the change log from.
+     * @param resourceXML_id Resource ID of the XML file to read the change log from.
      * @param full  If this is `true` the full change log is returned. Otherwise only changes for
      * versions newer than the last version are returned.
      * @return A `SparseArray` containing [ReleaseItem]s representing the (partial)
      * change log.
      */
-    protected fun readChangeLogFromResource(resId: Int, full: Boolean): SparseArray<ReleaseItem> {
-        val xml = context.resources.getXml(resId)
+    protected fun readChangeLogFromResource(resourceXMLid: Int, full: Boolean): SparseArray<ReleaseItem> {
+        val xml = context.resources.getXml(resourceXMLid)
         try {
             return readChangeLog(xml, full)
         } finally {
