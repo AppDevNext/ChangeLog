@@ -8,7 +8,7 @@
 This library provides an easy way to display a change log in your app.
 Without take care to VersionCode is necessary when you auto generate the VersionCode
 
-## Usage manuel XML
+## Usage of a XML
 
 1. Create the master change log in `res/xml/changelog_master.xml`. Formatted like this:
 
@@ -32,14 +32,14 @@ Without take care to VersionCode is necessary when you auto generate the Version
 language-specific versions of `res/xml/`, e.g. `res/xml-de/changelog.xml`.
 
 ## Usage git changelog
-To generate a git changelog, grouped by tag you can run `getTagGroupedGitlog` e.g
+To generate a git changelog, grouped by tag you can run `getTagGroupedGitlog` `from git submodule buildSrc/src/main/kotlin/info/git/versionHelper` 
+This will automatic generate a changelog based on git history, grouped by tags.
 
 ```kts
 afterEvaluate {
     tasks.named("generateReleaseResources") {
         doLast {
             getTagGroupedGitlog(
-                verbose = true,
                 filter = "RELEASE", // optional, only include tags with "RELEASE" in their name
                 filename = "app/src/main/res/raw/gitlog.json"
             )
