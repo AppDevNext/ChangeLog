@@ -35,7 +35,7 @@ dependencies {
     implementation(project(":ChangeLogLib"))
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.21")
 }
 
 afterEvaluate {
