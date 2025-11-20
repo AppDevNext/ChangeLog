@@ -15,7 +15,7 @@ jobs:
         os: [ ubuntu-latest ]
         java_version: [ 17 ]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: true
           fetch-depth: 0
