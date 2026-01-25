@@ -2,12 +2,12 @@ package info.hannes.changelog
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.content.pm.PackageManager.NameNotFoundException
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.preference.PreferenceManager
 import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.size
@@ -29,7 +29,7 @@ import java.util.Collections
  */
 open class ChangeLog @JvmOverloads constructor(
     private val context: Context,
-    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
+    preferences: SharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE),
     protected val css: String = DEFAULT_CSS,
     val callback: (() -> Unit)? = null
 ) {
@@ -153,7 +153,11 @@ open class ChangeLog @JvmOverloads constructor(
      * @param context Context that is used to access the resources and to create the ChangeLog dialogs.
      * @param css     CSS styles that will be used to format the change log.
      */
-    constructor(context: Context, css: String) : this(context, PreferenceManager.getDefaultSharedPreferences(context), css) {}
+    constructor(context: Context, css: String) : this(
+        context = context,
+        preferences = context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE),
+        css = css
+    )
 
     init {
         try {
@@ -228,7 +232,8 @@ open class ChangeLog @JvmOverloads constructor(
      * Write current version code to the preferences.
      */
     protected fun updateVersionInPreferences() {
-        val sp = PreferenceManager.getDefaultSharedPreferences(context)
+
+        val sp = context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE)
         val editor = sp.edit()
         editor.putInt(VERSION_KEY, currentVersionCode)
         editor.apply()
@@ -458,19 +463,10 @@ open class ChangeLog @JvmOverloads constructor(
                 "li { margin-left: 0px; }" + "\n" +
                 "ul { padding-left: 2em; }"
 
-        /**
-         * Tag that is used when sending error/debug messages to the log.
-         */
         private const val LOG_TAG = "ChangeLog"
 
-        /**
-         * This is the key used when storing the version code in SharedPreferences.
-         */
-        protected const val VERSION_KEY = "ChangeLog_last_version_code"
-
-        /**
-         * Constant that used when no version code is available.
-         */
-        protected const val NO_VERSION = -1
+        const val VERSION_KEY = "ChangeLog_last_version_code"
+        const val NO_VERSION = -1
+        const val PREFERENCES_NAME = "changelog"
     }
 }
