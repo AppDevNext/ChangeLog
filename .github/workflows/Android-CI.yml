@@ -25,7 +25,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: ${{ matrix.java_version }}
-      - uses: gradle/actions/wrapper-validation@v5
+      - uses: gradle/actions/wrapper-validation@v6
       - name: Build with Gradle
         run: ./gradlew assembleDebug lint
       - name: Archive Lint report
