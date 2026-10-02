@@ -2,7 +2,6 @@ import info.git.versionHelper.getTagGroupedGitlog
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
 }
 
 android {
