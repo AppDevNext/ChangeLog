@@ -11,7 +11,7 @@ android {
         versionName = "1.0"
 
         compileSdk = 37
-        minSdk = 21
+        minSdk = 23
     }
     packaging {
         resources {
