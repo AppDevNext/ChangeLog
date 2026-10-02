@@ -10,7 +10,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        compileSdk = 36
+        compileSdk = 37
         minSdk = 21
     }
     packaging {

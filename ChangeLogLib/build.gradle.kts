@@ -7,9 +7,8 @@ plugins {
 android {
     namespace = "info.hannes.changeloglib"
     defaultConfig {
-
         minSdk = 21
-        compileSdk = 35
+        compileSdk = 37
     }
 
     compileOptions {
