@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
     id("maven-publish")
     kotlin("plugin.serialization") version "2.2.20"
 }
