@@ -25,7 +25,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: ${{ matrix.java_version }}
-      - uses: gradle/actions/wrapper-validation@v6.3.0
+      - uses: gradle/actions/wrapper-validation@v6.4.0
       - name: Build with Gradle
         run: ./gradlew assembleDebug lint
       - name: Archive Lint report
